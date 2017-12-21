@@ -22,5 +22,13 @@ namespace Managementsysteem.Data
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
         }
+
+        public DbSet<Managementsysteem.Models.Afspraak> Afspraak { get; set; }
+
+        public DbSet<Managementsysteem.Models.Klant> Klant { get; set; }
+
+        public DbSet<Managementsysteem.Models.Project> Project { get; set; }
+
+        public DbSet<Managementsysteem.Models.Taak> Taak { get; set; }
     }
 }
