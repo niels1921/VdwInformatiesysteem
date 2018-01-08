@@ -11,9 +11,10 @@ using System;
 namespace Managementsysteem.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171222104449_Taak")]
+    partial class Taak
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -25,24 +26,20 @@ namespace Managementsysteem.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("Afspraak_Id");
-
                     b.Property<DateTime>("Datum");
 
-                    b.Property<int>("Klant_Id");
+                    b.Property<int?>("KlantId");
 
                     b.Property<string>("Omschrijving")
                         .IsRequired();
 
-                    b.Property<int>("Project_Id");
+                    b.Property<int?>("ProjectId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Afspraak_Id");
+                    b.HasIndex("KlantId");
 
-                    b.HasIndex("Klant_Id");
-
-                    b.HasIndex("Project_Id");
+                    b.HasIndex("ProjectId");
 
                     b.ToTable("Afspraak");
                 });
@@ -61,8 +58,6 @@ namespace Managementsysteem.Data.Migrations
                         .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed");
-
-                    b.Property<string>("Image");
 
                     b.Property<bool>("LockoutEnabled");
 
@@ -105,8 +100,6 @@ namespace Managementsysteem.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("Afspraak_Id");
-
                     b.Property<string>("Contactpersoon");
 
                     b.Property<string>("Email");
@@ -117,8 +110,6 @@ namespace Managementsysteem.Data.Migrations
                         .IsRequired();
 
                     b.Property<string>("Postcode");
-
-                    b.Property<int>("Project_Id");
 
                     b.Property<string>("Straatnaam");
 
@@ -136,30 +127,22 @@ namespace Managementsysteem.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("Afspraak_Id");
-
                     b.Property<DateTime>("Deadline");
 
-                    b.Property<int>("Klant_Id");
+                    b.Property<int?>("KlantId");
 
                     b.Property<string>("Naam")
                         .IsRequired();
 
                     b.Property<string>("Omschrijving");
 
-                    b.Property<int?>("Project_Id");
-
                     b.Property<DateTime>("Startdatum");
 
                     b.Property<string>("Status");
 
-                    b.Property<int>("Taak_Id");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("Klant_Id");
-
-                    b.HasIndex("Project_Id");
+                    b.HasIndex("KlantId");
 
                     b.ToTable("Project");
                 });
@@ -173,16 +156,12 @@ namespace Managementsysteem.Data.Migrations
 
                     b.Property<double>("GewerkteUren");
 
-                    b.Property<string>("Image");
-
                     b.Property<string>("Naam")
                         .IsRequired();
 
                     b.Property<string>("Omschrijving");
 
                     b.Property<int>("Project_Id");
-
-                    b.Property<int?>("Taak_Id");
 
                     b.Property<string>("UserId");
 
@@ -193,8 +172,6 @@ namespace Managementsysteem.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("Project_Id");
-
-                    b.HasIndex("Taak_Id");
 
                     b.HasIndex("UserId");
 
@@ -311,47 +288,28 @@ namespace Managementsysteem.Data.Migrations
 
             modelBuilder.Entity("Managementsysteem.Models.Afspraak", b =>
                 {
-                    b.HasOne("Managementsysteem.Models.Klant")
-                        .WithMany("Afspraken")
-                        .HasForeignKey("Afspraak_Id");
-
-                    b.HasOne("Managementsysteem.Models.Project")
-                        .WithMany("Afspraken")
-                        .HasForeignKey("Afspraak_Id");
-
                     b.HasOne("Managementsysteem.Models.Klant", "Klant")
-                        .WithMany()
-                        .HasForeignKey("Klant_Id")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .WithMany("Afspraken")
+                        .HasForeignKey("KlantId");
 
                     b.HasOne("Managementsysteem.Models.Project", "Project")
-                        .WithMany()
-                        .HasForeignKey("Project_Id")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .WithMany("Afspraken")
+                        .HasForeignKey("ProjectId");
                 });
 
             modelBuilder.Entity("Managementsysteem.Models.Project", b =>
                 {
                     b.HasOne("Managementsysteem.Models.Klant", "Klant")
-                        .WithMany()
-                        .HasForeignKey("Klant_Id")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Managementsysteem.Models.Klant")
                         .WithMany("Projecten")
-                        .HasForeignKey("Project_Id");
+                        .HasForeignKey("KlantId");
                 });
 
             modelBuilder.Entity("Managementsysteem.Models.Taak", b =>
                 {
                     b.HasOne("Managementsysteem.Models.Project", "Project")
-                        .WithMany()
+                        .WithMany("Taken")
                         .HasForeignKey("Project_Id")
                         .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Managementsysteem.Models.Project")
-                        .WithMany("Taken")
-                        .HasForeignKey("Taak_Id");
 
                     b.HasOne("Managementsysteem.Models.ApplicationUser", "Werknemer")
                         .WithMany()

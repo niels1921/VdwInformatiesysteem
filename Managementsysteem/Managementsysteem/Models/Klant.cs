@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -19,7 +20,14 @@ namespace Managementsysteem.Models
         public string Huisnummer { get; set; }
         public string Postcode { get; set; }
         public string Woonplaats { get; set; }
+
+        public int Project_Id { get; set; }
+        [ForeignKey("Project_Id")]
         public List<Project> Projecten { get; set; }
+
+
+        public int Afspraak_Id { get; set; }
+        [ForeignKey("Afspraak_Id")]
         public List<Afspraak> Afspraken { get; set; }
 
     }

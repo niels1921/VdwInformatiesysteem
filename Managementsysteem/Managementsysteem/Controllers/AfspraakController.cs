@@ -22,7 +22,8 @@ namespace Managementsysteem.Controllers
         // GET: Afspraak
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Afspraak.ToListAsync());
+            var applicationDbContext = _context.Afspraak.Include(a => a.Klant).Include(a => a.Project);
+            return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Afspraak/Details/5
@@ -34,6 +35,8 @@ namespace Managementsysteem.Controllers
             }
 
             var afspraak = await _context.Afspraak
+                .Include(a => a.Klant)
+                .Include(a => a.Project)
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (afspraak == null)
             {
@@ -46,6 +49,8 @@ namespace Managementsysteem.Controllers
         // GET: Afspraak/Create
         public IActionResult Create()
         {
+            ViewData["Klant_Id"] = new SelectList(_context.Klant, "Id", "Naam");
+            ViewData["Project_Id"] = new SelectList(_context.Project, "Id", "Naam");
             return View();
         }
 
@@ -54,7 +59,7 @@ namespace Managementsysteem.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Datum,Omschrijving")] Afspraak afspraak)
+        public async Task<IActionResult> Create([Bind("Id,Datum,Klant_Id,Omschrijving,Project_Id")] Afspraak afspraak)
         {
             if (ModelState.IsValid)
             {
@@ -62,6 +67,8 @@ namespace Managementsysteem.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["Klant_Id"] = new SelectList(_context.Klant, "Id", "Naam", afspraak.Klant_Id);
+            ViewData["Project_Id"] = new SelectList(_context.Project, "Id", "Naam", afspraak.Project_Id);
             return View(afspraak);
         }
 
@@ -78,6 +85,8 @@ namespace Managementsysteem.Controllers
             {
                 return NotFound();
             }
+            ViewData["Klant_Id"] = new SelectList(_context.Klant, "Id", "Naam", afspraak.Klant_Id);
+            ViewData["Project_Id"] = new SelectList(_context.Project, "Id", "Naam", afspraak.Project_Id);
             return View(afspraak);
         }
 
@@ -86,7 +95,7 @@ namespace Managementsysteem.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Datum,Omschrijving")] Afspraak afspraak)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Datum,Klant_Id,Omschrijving,Project_Id")] Afspraak afspraak)
         {
             if (id != afspraak.Id)
             {
@@ -113,6 +122,8 @@ namespace Managementsysteem.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["Klant_Id"] = new SelectList(_context.Klant, "Id", "Naam", afspraak.Klant_Id);
+            ViewData["Project_Id"] = new SelectList(_context.Project, "Id", "Naam", afspraak.Project_Id);
             return View(afspraak);
         }
 
@@ -125,6 +136,8 @@ namespace Managementsysteem.Controllers
             }
 
             var afspraak = await _context.Afspraak
+                .Include(a => a.Klant)
+                .Include(a => a.Project)
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (afspraak == null)
             {

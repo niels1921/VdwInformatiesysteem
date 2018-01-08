@@ -19,13 +19,14 @@ namespace Managementsysteem.Controllers
             _context = context;
         }
 
-        // GET: Taaks
+        // GET: Taak
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Taak.ToListAsync());
+            var applicationDbContext = _context.Taak.Include(t => t.Project);
+            return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: Taaks/Details/5
+        // GET: Taak/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,6 +35,7 @@ namespace Managementsysteem.Controllers
             }
 
             var taak = await _context.Taak
+                .Include(t => t.Project)
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (taak == null)
             {
@@ -43,18 +45,19 @@ namespace Managementsysteem.Controllers
             return View(taak);
         }
 
-        // GET: Taaks/Create
+        // GET: Taak/Create
         public IActionResult Create()
         {
+            ViewData["Project_Id"] = new SelectList(_context.Project, "Id", "Naam");
             return View();
         }
 
-        // POST: Taaks/Create
+        // POST: Taak/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Naam,Omschrijving,Datum,VerwachteUren,GewerkteUren")] Taak taak)
+        public async Task<IActionResult> Create([Bind("Id,Naam,Project_Id,Omschrijving,Datum,VerwachteUren,GewerkteUren,User_id,Image")] Taak taak)
         {
             if (ModelState.IsValid)
             {
@@ -62,10 +65,11 @@ namespace Managementsysteem.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["Project_Id"] = new SelectList(_context.Project, "Id", "Naam", taak.Project_Id);
             return View(taak);
         }
 
-        // GET: Taaks/Edit/5
+        // GET: Taak/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -78,15 +82,16 @@ namespace Managementsysteem.Controllers
             {
                 return NotFound();
             }
+            ViewData["Project_Id"] = new SelectList(_context.Project, "Id", "Naam", taak.Project_Id);
             return View(taak);
         }
 
-        // POST: Taaks/Edit/5
+        // POST: Taak/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Naam,Omschrijving,Datum,VerwachteUren,GewerkteUren")] Taak taak)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Naam,Project_Id,Omschrijving,Datum,VerwachteUren,GewerkteUren,User_id,Image")] Taak taak)
         {
             if (id != taak.Id)
             {
@@ -113,10 +118,11 @@ namespace Managementsysteem.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["Project_Id"] = new SelectList(_context.Project, "Id", "Naam", taak.Project_Id);
             return View(taak);
         }
 
-        // GET: Taaks/Delete/5
+        // GET: Taak/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -125,6 +131,7 @@ namespace Managementsysteem.Controllers
             }
 
             var taak = await _context.Taak
+                .Include(t => t.Project)
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (taak == null)
             {
@@ -134,7 +141,7 @@ namespace Managementsysteem.Controllers
             return View(taak);
         }
 
-        // POST: Taaks/Delete/5
+        // POST: Taak/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

@@ -20,6 +20,11 @@
                 <span asp-validation-for="Naam" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Project_Id" class="control-label"></label>
+                <select asp-for="Project_Id" class="form-control" asp-items="ViewBag.Project_Id"></select>
+                <span asp-validation-for="Project_Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Omschrijving" class="control-label"></label>
                 <input asp-for="Omschrijving" class="form-control" />
                 <span asp-validation-for="Omschrijving" class="text-danger"></span>
@@ -38,6 +43,16 @@
                 <label asp-for="GewerkteUren" class="control-label"></label>
                 <input asp-for="GewerkteUren" class="form-control" />
                 <span asp-validation-for="GewerkteUren" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="User_id" class="control-label"></label>
+                <input asp-for="User_id" class="form-control" />
+                <span asp-validation-for="User_id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Image" class="control-label"></label>
+                <input asp-for="Image" class="form-control" />
+                <span asp-validation-for="Image" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-default" />

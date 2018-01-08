@@ -11,9 +11,10 @@ using System;
 namespace Managementsysteem.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180108125420_new")]
+    partial class @new
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -118,8 +119,6 @@ namespace Managementsysteem.Data.Migrations
 
                     b.Property<string>("Postcode");
 
-                    b.Property<int>("Project_Id");
-
                     b.Property<string>("Straatnaam");
 
                     b.Property<string>("Telefoon");
@@ -147,8 +146,6 @@ namespace Managementsysteem.Data.Migrations
 
                     b.Property<string>("Omschrijving");
 
-                    b.Property<int?>("Project_Id");
-
                     b.Property<DateTime>("Startdatum");
 
                     b.Property<string>("Status");
@@ -158,8 +155,6 @@ namespace Managementsysteem.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("Klant_Id");
-
-                    b.HasIndex("Project_Id");
 
                     b.ToTable("Project");
                 });
@@ -336,10 +331,6 @@ namespace Managementsysteem.Data.Migrations
                         .WithMany()
                         .HasForeignKey("Klant_Id")
                         .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Managementsysteem.Models.Klant")
-                        .WithMany("Projecten")
-                        .HasForeignKey("Project_Id");
                 });
 
             modelBuilder.Entity("Managementsysteem.Models.Taak", b =>
