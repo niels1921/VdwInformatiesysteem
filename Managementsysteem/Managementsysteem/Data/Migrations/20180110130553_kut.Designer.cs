@@ -11,8 +11,8 @@ using System;
 namespace Managementsysteem.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180110111241_override")]
-    partial class @override
+    [Migration("20180110130553_kut")]
+    partial class kut
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
