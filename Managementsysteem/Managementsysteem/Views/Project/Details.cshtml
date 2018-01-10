@@ -1,0 +1,55 @@
+﻿@model Managementsysteem.Models.Project
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Project</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Naam)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Naam)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Omschrijving)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Omschrijving)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Startdatum)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Startdatum)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Deadline)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Deadline)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Klant)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Klant.Naam)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

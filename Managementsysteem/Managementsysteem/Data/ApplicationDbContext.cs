@@ -27,7 +27,7 @@ namespace Managementsysteem.Data
 
         public DbSet<Managementsysteem.Models.Klant> Klant { get; set; }
 
-//        public DbSet<Managementsysteem.Models.Project> Project { get; set; }
+        public DbSet<Managementsysteem.Models.Project> Project { get; set; }
 
         public DbSet<Managementsysteem.Models.Taak> Taak { get; set; }
 

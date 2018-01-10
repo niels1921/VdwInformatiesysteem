@@ -15,8 +15,8 @@ namespace Managementsysteem.Models
         public String Beschrijving { get; set; }
         public DateTime Datum { get; set; }
 
-        //public int Project_Id { get; set; }
-       // [ForeignKey("Project_Id")]
-       // public Project Project { get; set; }
+        public int Project_Id { get; set; }
+        [ForeignKey("Project_Id")]
+        public Project Project { get; set; }
     }
 }

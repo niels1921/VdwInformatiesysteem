@@ -7,17 +7,23 @@ using System.Threading.Tasks;
 
 namespace Managementsysteem.Models
 {
-    public class Afspraak
+    public class Project
     {
+        [Key]
         public int Id { get; set; }
-        public DateTime Datum { get; set; }
+        [Required]
+        public string Naam { get; set; }
+        public string Status { get; set; }
+
+
         public int Klant_Id { get; set; }
         [ForeignKey("Klant_Id")]
         public Klant Klant { get; set; }
-        [Required]
+
         public string Omschrijving { get; set; }
-        public int Project_Id { get; set; }
-        [ForeignKey("Project_Id")]
-        public Project Project { get; set; }
+        public DateTime Startdatum { get; set; }
+        public DateTime Deadline { get; set; }
+
+
     }
 }
