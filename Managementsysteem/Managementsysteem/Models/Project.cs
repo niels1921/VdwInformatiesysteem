@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace Managementsysteem.Models
         public string Naam { get; set; }
         public string Status { get; set; }
 
-
+        [DisplayName("Klant")]
         public int Klant_Id { get; set; }
         [ForeignKey("Klant_Id")]
         public Klant Klant { get; set; }

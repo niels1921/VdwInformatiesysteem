@@ -55,7 +55,7 @@ namespace Managementsysteem.Controllers
         // GET: Project/Create
         public IActionResult Create()
         {
-            var status = new List<string> {"Afgerond", "Ingepland"};
+            var status = new List<string> {"Nog inplannen", "Ingepland", "In progress", "Afgerond" };
             ViewData["Status"] = new SelectList(status);
             ViewData["Klant_Id"] = new SelectList(_context.Klant, "Id", "Naam");
             return View();
@@ -74,6 +74,9 @@ namespace Managementsysteem.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            var status = new List<string> { "Nog inplannen", "Ingepland", "In progress", "Afgerond" };
+            ViewData["Status"] = new SelectList(status);
+
             ViewData["Klant_Id"] = new SelectList(_context.Klant, "Id", "Naam", project.Klant_Id);
             return View(project);
         }
@@ -91,6 +94,9 @@ namespace Managementsysteem.Controllers
             {
                 return NotFound();
             }
+            var status = new List<string> { "Nog inplannen", "Ingepland", "In progress", "Afgerond" };
+            ViewData["Status"] = new SelectList(status);
+
             ViewData["Klant_Id"] = new SelectList(_context.Klant, "Id", "Naam", project.Klant_Id);
             return View(project);
         }
@@ -127,6 +133,9 @@ namespace Managementsysteem.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            var status = new List<string> { "Nog inplannen", "Ingepland", "In progress", "Afgerond" };
+            ViewData["Status"] = new SelectList(status);
+
             ViewData["Klant_Id"] = new SelectList(_context.Klant, "Id", "Naam", project.Klant_Id);
             return View(project);
         }
