@@ -28,7 +28,7 @@ namespace Managementsysteem.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                projecten = projecten.Where(s => s.Naam.Contains(searchString));               
+                projecten = projecten.Where(s => s.Naam.Contains(searchString));
             }
             return View(await projecten.ToListAsync());
         }
@@ -163,5 +163,7 @@ namespace Managementsysteem.Controllers
         {
             return _context.Project.Any(e => e.Id == id);
         }
+
+        //i love memes
     }
 }
