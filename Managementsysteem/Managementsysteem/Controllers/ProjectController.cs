@@ -55,6 +55,8 @@ namespace Managementsysteem.Controllers
         // GET: Project/Create
         public IActionResult Create()
         {
+            var status = new List<string> {"Afgerond", "Ingepland"};
+            ViewData["Status"] = new SelectList(status);
             ViewData["Klant_Id"] = new SelectList(_context.Klant, "Id", "Naam");
             return View();
         }
