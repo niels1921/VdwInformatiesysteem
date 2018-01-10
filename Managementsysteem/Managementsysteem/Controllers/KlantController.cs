@@ -204,5 +204,6 @@ namespace Managementsysteem.Controllers
         {
             return _context.Klant.Any(e => e.Id == id);
         }
+        // hi im gay lol
     }
 }
