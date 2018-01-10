@@ -20,10 +20,17 @@ namespace Managementsysteem.Controllers
         }
 
         // GET: Project
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
             var applicationDbContext = _context.Project.Include(p => p.Klant);
-            return View(await applicationDbContext.ToListAsync());
+            var projecten = from p in _context.Project.Include(p => p.Klant)
+                            select p;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                projecten = projecten.Where(s => s.Naam.Contains(searchString));               
+            }
+            return View(await projecten.ToListAsync());
         }
 
         // GET: Project/Details/5
