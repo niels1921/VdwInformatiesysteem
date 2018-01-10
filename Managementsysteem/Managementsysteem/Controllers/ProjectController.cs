@@ -28,7 +28,7 @@ namespace Managementsysteem.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                projecten = projecten.Where(s => s.Naam.Contains(searchString));               
+                projecten = projecten.Where(s => s.Naam.Contains(searchString));
             }
             return View(await projecten.ToListAsync());
         }
@@ -55,6 +55,8 @@ namespace Managementsysteem.Controllers
         // GET: Project/Create
         public IActionResult Create()
         {
+            var status = new List<string> {"Afgerond", "Ingepland"};
+            ViewData["Status"] = new SelectList(status);
             ViewData["Klant_Id"] = new SelectList(_context.Klant, "Id", "Naam");
             return View();
         }
