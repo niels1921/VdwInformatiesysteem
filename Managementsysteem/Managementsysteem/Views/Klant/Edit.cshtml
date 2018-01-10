@@ -11,8 +11,9 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Edit" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="Naam" class="control-label"></label>
@@ -55,15 +56,22 @@
                 <span asp-validation-for="Woonplaats" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Project_Id" class="control-label"></label>
-                <input asp-for="Project_Id" class="form-control" />
-                <span asp-validation-for="Project_Id" class="text-danger"></span>
+                <label asp-for="Profiel_foto" class="col-md-2 control-label"></label>
+                <div class="col-md-10">
+                    <img src="~/Uploads/@Model.Naam/@Model.Profiel_foto" class="profilePicture" />
+                    <input type="hidden" asp-for="Profiel_foto" />
+                </div>
             </div>
             <div class="form-group">
-                <label asp-for="Afspraak_Id" class="control-label"></label>
-                <input asp-for="Afspraak_Id" class="form-control" />
-                <span asp-validation-for="Afspraak_Id" class="text-danger"></span>
+                <label class="col-md-2 control-label"></label>
+                <div class="col-md-10">
+                    <input type="file" name="ProfilePictureFile" />
+                    <span asp-validation-for="Profiel_foto" class="text-danger"></span>
+                </div>
             </div>
+
+
+
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-default" />
             </div>

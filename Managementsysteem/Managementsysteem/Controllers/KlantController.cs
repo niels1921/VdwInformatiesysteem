@@ -5,19 +5,31 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Managementsysteem.Data;
 using Managementsysteem.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Http;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
+using Managementsysteem.Data;
+using Microsoft.AspNetCore.Hosting.Internal;
+using System.Net.Http.Headers;
 
 namespace Managementsysteem.Controllers
 {
     public class KlantController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private IHostingEnvironment _Environment;
 
-        public KlantController(ApplicationDbContext context)
+
+        public KlantController(ApplicationDbContext context, IHostingEnvironment environment)
         {
             _context = context;
+            _Environment = environment;
+
         }
+
+
 
         // GET: Klant
         public async Task<IActionResult> Index()
@@ -54,10 +66,32 @@ namespace Managementsysteem.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Naam,Contactpersoon,Email,Telefoon,Straatnaam,Huisnummer,Postcode,Woonplaats,Project_Id,Afspraak_Id")] Klant klant)
+        public async Task<IActionResult> Create([Bind("Id,Naam,Contactpersoon,Email,Telefoon,Straatnaam,Huisnummer,Postcode,Woonplaats,Profiel_foto")] Klant klant, IFormFile ProfilePictureFile)
         {
             if (ModelState.IsValid)
             {
+
+                if (ProfilePictureFile != null)
+                {
+
+                    string uploadPatch = Path.Combine(_Environment.WebRootPath, "uploads");
+                    Directory.CreateDirectory(Path.Combine(uploadPatch, klant.Naam));
+
+                    string FileName = ProfilePictureFile.FileName;
+                    if (FileName.Contains('\\'))
+                    {
+                        FileName = FileName.Split('\\').Last();
+                    }
+
+                    using (var stream = new FileStream(Path.Combine(uploadPatch, klant.Naam, FileName), FileMode.Create))
+                    {
+                        await ProfilePictureFile.CopyToAsync(stream);
+                    }
+                    klant.Profiel_foto = FileName;
+                }
+
+
+
                 _context.Add(klant);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -86,7 +120,7 @@ namespace Managementsysteem.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Naam,Contactpersoon,Email,Telefoon,Straatnaam,Huisnummer,Postcode,Woonplaats,Project_Id,Afspraak_Id")] Klant klant)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Naam,Contactpersoon,Email,Telefoon,Straatnaam,Huisnummer,Postcode,Woonplaats,Profiel_foto")] Klant klant, IFormFile ProfilePictureFile)
         {
             if (id != klant.Id)
             {
@@ -97,6 +131,27 @@ namespace Managementsysteem.Controllers
             {
                 try
                 {
+                    if (ProfilePictureFile != null)
+                    {
+
+                        string uploadPatch = Path.Combine(_Environment.WebRootPath, "uploads");
+                        Directory.CreateDirectory(Path.Combine(uploadPatch, klant.Naam));
+
+                        string FileName = ProfilePictureFile.FileName;
+                        if (FileName.Contains('\\'))
+                        {
+                            FileName = FileName.Split('\\').Last();
+                        }
+
+                        using (var stream = new FileStream(Path.Combine(uploadPatch, klant.Naam, FileName), FileMode.Create))
+                        {
+                            await ProfilePictureFile.CopyToAsync(stream);
+                        }
+                        klant.Profiel_foto = FileName;
+                    }
+
+
+
                     _context.Update(klant);
                     await _context.SaveChangesAsync();
                 }

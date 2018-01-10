@@ -22,7 +22,7 @@ namespace Managementsysteem.Controllers
         // GET: Taak
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Taak.Include(t => t.Project);
+            var applicationDbContext = _context.Taak.Include(t => t.Project).Include(t => t.Werknemer);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -36,6 +36,7 @@ namespace Managementsysteem.Controllers
 
             var taak = await _context.Taak
                 .Include(t => t.Project)
+                .Include(t => t.Werknemer)
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (taak == null)
             {
@@ -49,6 +50,7 @@ namespace Managementsysteem.Controllers
         public IActionResult Create()
         {
             ViewData["Project_Id"] = new SelectList(_context.Project, "Id", "Naam");
+            ViewData["User_id"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
 
@@ -66,6 +68,7 @@ namespace Managementsysteem.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["Project_Id"] = new SelectList(_context.Project, "Id", "Naam", taak.Project_Id);
+            ViewData["User_id"] = new SelectList(_context.Users, "Id", "Id", taak.User_id);
             return View(taak);
         }
 
@@ -83,6 +86,7 @@ namespace Managementsysteem.Controllers
                 return NotFound();
             }
             ViewData["Project_Id"] = new SelectList(_context.Project, "Id", "Naam", taak.Project_Id);
+            ViewData["User_id"] = new SelectList(_context.Users, "Id", "Id", taak.User_id);
             return View(taak);
         }
 
@@ -119,6 +123,7 @@ namespace Managementsysteem.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["Project_Id"] = new SelectList(_context.Project, "Id", "Naam", taak.Project_Id);
+            ViewData["User_id"] = new SelectList(_context.Users, "Id", "Id", taak.User_id);
             return View(taak);
         }
 
@@ -132,6 +137,7 @@ namespace Managementsysteem.Controllers
 
             var taak = await _context.Taak
                 .Include(t => t.Project)
+                .Include(t => t.Werknemer)
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (taak == null)
             {

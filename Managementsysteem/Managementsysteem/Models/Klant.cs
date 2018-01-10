@@ -21,14 +21,7 @@ namespace Managementsysteem.Models
         public string Postcode { get; set; }
         public string Woonplaats { get; set; }
 
-        public int Project_Id { get; set; }
-        [ForeignKey("Project_Id")]
-        public List<Project> Projecten { get; set; }
-
-
-        public int Afspraak_Id { get; set; }
-        [ForeignKey("Afspraak_Id")]
-        public List<Afspraak> Afspraken { get; set; }
+        public string Profiel_foto { get; set; }
 
     }
 }

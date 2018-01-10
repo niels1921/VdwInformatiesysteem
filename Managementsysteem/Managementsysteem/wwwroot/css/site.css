@@ -10,6 +10,10 @@
     padding-right: 15px;
 }
 
+h2 {
+    text-align: center;
+}
+
 /* Carousel */
 .carousel-caption p {
     font-size: 20px;

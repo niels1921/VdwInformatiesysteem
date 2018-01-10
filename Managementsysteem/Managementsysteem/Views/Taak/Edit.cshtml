@@ -46,7 +46,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="User_id" class="control-label"></label>
-                <input asp-for="User_id" class="form-control" />
+                <select asp-for="User_id" class="form-control" asp-items="ViewBag.User_id"></select>
                 <span asp-validation-for="User_id" class="text-danger"></span>
             </div>
             <div class="form-group">

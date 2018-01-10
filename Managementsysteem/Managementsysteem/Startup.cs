@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Managementsysteem.Data;
 using Managementsysteem.Models;
 using Managementsysteem.Services;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
 
 namespace Managementsysteem
 {
@@ -33,11 +35,17 @@ namespace Managementsysteem
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
+            services.AddSingleton<IFileProvider>(
+              new PhysicalFileProvider(
+                  Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
+
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
 
             services.AddMvc();
         }
+  
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

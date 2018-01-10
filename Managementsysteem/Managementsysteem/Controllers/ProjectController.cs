@@ -57,7 +57,7 @@ namespace Managementsysteem.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Naam,Status,Taak_Id,Klant_Id,Omschrijving,Startdatum,Deadline,Afspraak_Id")] Project project)
+        public async Task<IActionResult> Create([Bind("Id,Naam,Status,Taak_Id,Klant_Id,Omschrijving,Startdatum,Deadline")] Project project)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +91,7 @@ namespace Managementsysteem.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Naam,Status,Taak_Id,Klant_Id,Omschrijving,Startdatum,Deadline,Afspraak_Id")] Project project)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Naam,Status,Taak_Id,Klant_Id,Omschrijving,Startdatum,Deadline")] Project project)
         {
             if (id != project.Id)
             {

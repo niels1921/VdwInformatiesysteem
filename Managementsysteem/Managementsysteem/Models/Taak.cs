@@ -19,8 +19,9 @@ namespace Managementsysteem.Models
         public DateTime Datum { get; set; }
         public double VerwachteUren { get; set; }
         public double GewerkteUren { get; set; }
-        public int User_id { get; set; }
-        [ForeignKey("UserId")]
+
+        public string User_id { get; set; }
+        [ForeignKey("User_id")]
         public ApplicationUser Werknemer { get; set; }
 
         public string Image { get; set; }

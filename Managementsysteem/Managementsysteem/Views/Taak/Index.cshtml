@@ -29,13 +29,13 @@
                     @Html.DisplayNameFor(model => model.GewerkteUren)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.User_id)
-                </th>
-                <th>
                     @Html.DisplayNameFor(model => model.Image)
                 </th>
             <th>
                 @Html.DisplayNameFor(model => model.Project)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Werknemer)
             </th>
             <th></th>
         </tr>
@@ -59,13 +59,13 @@
                 @Html.DisplayFor(modelItem => item.GewerkteUren)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.User_id)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Image)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Project.Naam)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Werknemer.Id)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
