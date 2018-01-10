@@ -191,7 +191,7 @@ namespace Managementsysteem.Data.Migrations
                 column: "Klant_Id",
                 principalTable: "Klant",
                 principalColumn: "Id",
-                onUpdate: ReferentialAction.NoAction);
+                onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Project_Klant_Project_Id",
@@ -364,7 +364,7 @@ namespace Managementsysteem.Data.Migrations
                 column: "KlantId",
                 principalTable: "Klant",
                 principalColumn: "Id",
-                onUpdate: ReferentialAction.Restrict);
+                onDelete: ReferentialAction.Restrict);
         }
     }
 }
