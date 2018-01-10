@@ -16,8 +16,8 @@ namespace Managementsysteem.Models
         public Klant Klant { get; set; }
         [Required]
         public string Omschrijving { get; set; }
-        public int Project_Id { get; set; }
-        [ForeignKey("Project_Id")]
-        public Project Project { get; set; }
+        //public int Project_Id { get; set; }
+        //[ForeignKey("Project_Id")]
+       // public Project Project { get; set; }
     }
 }

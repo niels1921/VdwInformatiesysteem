@@ -11,9 +11,10 @@ using System;
 namespace Managementsysteem.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180110111241_override")]
+    partial class @override
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -151,7 +152,7 @@ namespace Managementsysteem.Data.Migrations
 
                     b.Property<DateTime>("Deadline");
 
-                    b.Property<int>("KlantId");
+                    b.Property<int>("Klant_Id");
 
                     b.Property<string>("Naam")
                         .IsRequired();
@@ -164,7 +165,7 @@ namespace Managementsysteem.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("KlantId");
+                    b.HasIndex("Klant_Id");
 
                     b.ToTable("Project");
                 });
@@ -333,7 +334,7 @@ namespace Managementsysteem.Data.Migrations
                 {
                     b.HasOne("Managementsysteem.Models.Klant", "Klant")
                         .WithMany()
-                        .HasForeignKey("KlantId")
+                        .HasForeignKey("Klant_Id")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
