@@ -163,5 +163,7 @@ namespace Managementsysteem.Controllers
         {
             return _context.Project.Any(e => e.Id == id);
         }
+
+        //i love memes
     }
 }
