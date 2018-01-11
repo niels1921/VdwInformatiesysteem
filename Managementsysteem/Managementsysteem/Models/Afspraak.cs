@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -10,12 +11,19 @@ namespace Managementsysteem.Models
     public class Afspraak
     {
         public int Id { get; set; }
+
+        [Required(ErrorMessage = "*kies een datum")]
         public DateTime Datum { get; set; }
+
+        [DisplayName("Klant ID")]
         public int Klant_Id { get; set; }
         [ForeignKey("Klant_Id")]
         public Klant Klant { get; set; }
-        [Required]
+
+        [Required(ErrorMessage = "*geef een omschrijving van de afspraak")]
         public string Omschrijving { get; set; }
+
+        [DisplayName("Project ID")]
         public int Project_Id { get; set; }
         [ForeignKey("Project_Id")]
         public Project Project { get; set; }
