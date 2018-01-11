@@ -32,9 +32,17 @@ namespace Managementsysteem.Controllers
 
 
         // GET: Klant
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
-            return View(await _context.Klant.ToListAsync());
+            var klanten = from k in _context.Klant
+                            select k;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                klanten = klanten.Where(s => s.Naam.Contains(searchString));
+            }
+
+            return View(await klanten.ToListAsync());
         }
 
         // GET: Klant/Details/5

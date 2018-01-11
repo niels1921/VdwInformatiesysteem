@@ -7,6 +7,13 @@
 
 <h2>Index</h2>
 
+<form asp-controller="Klant" asp-action="Index" method="get">
+    <p>
+        Title: <input type="text" name="SearchString">
+        <input type="submit" value="Zoek" />
+    </p>
+</form>
+
 <p>
     <a asp-action="Create">Create New</a>
 </p>
