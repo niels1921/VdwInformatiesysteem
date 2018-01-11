@@ -6,16 +6,40 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Managementsysteem.Models;
 using Microsoft.AspNetCore.Authorization;
+using Managementsysteem.Models.ViewModels;
+using Managementsysteem.Data;
 
 namespace Managementsysteem.Controllers
 {
 
-    [Authorize]
     public class HomeController : Controller
     {
+        private readonly ApplicationDbContext _context;
+
+        public HomeController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
         public IActionResult Index()
         {
-            return View();
+            ViewBag.Message = "Welcome to my demo!";
+            HomeViewmodel mymodel = new HomeViewmodel();
+
+            var Taken = from Taak in _context.Taak
+                                    select Taak;
+
+            var Projecten = from Project in _context.Project
+                        select Project;
+
+            var Afspraken = from Afspraak in _context.Afspraak
+                            select Afspraak;
+
+            mymodel.Taak = Taken;
+            mymodel.Afspraak = Afspraken;
+            mymodel.Project = Projecten;
+            return View(mymodel);
+
         }
 
        

@@ -1,17 +1,48 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+@model Managementsysteem.Models.ViewModels.HomeViewmodel
 
 
 
 <div class="row">
     <div class="col-md-4">
         <h2>Taken</h2>
+
+        @foreach (Taak taak in Model.Taak)
+        {
+            <tr>
+                <td>@taak.Naam</td>
+                <td>@taak.Omschrijving</td>
+                
+            </tr>
+        }
+
     </div>
     <div class="col-md-4">
         <h2>Projecten</h2>
+
+        @foreach (Project project in Model.Project)
+    {
+        <tr>
+            <td>@project.Naam</td>
+            <td>@project.Omschrijving</td>
+
+        </tr>
+}
+
     </div>
     <div class="col-md-4">
         <h2>Afspraken</h2>
+
+        @foreach (Afspraak afspraak in Model.Afspraak)
+    {
+        <tr>
+            <td>@afspraak.Omschrijving</td>
+            <td>@afspraak.Datum</td>
+
+        </tr>
+}
+
     </div>
 </div>

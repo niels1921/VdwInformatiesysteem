@@ -7,8 +7,8 @@ namespace Managementsysteem.Models.ViewModels
 {
     public class HomeViewmodel
     {
-        public Taak Taak{ get; set; }
-        public Project Project { get; set; }
-        public Afspraak Afspraak { get; set; }
+        public IEnumerable<Taak> Taak { get; set; }
+        public IEnumerable<Project> Project { get; set; }
+        public IEnumerable<Afspraak> Afspraak { get; set; }
     }
 }
