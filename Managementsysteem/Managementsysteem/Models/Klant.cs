@@ -15,6 +15,10 @@ namespace Managementsysteem.Models
         public string Naam { get; set; }
         public string Contactpersoon { get; set; }
         public string Email { get; set; }
+
+        [Display(Name = "Telefoonnummer")]
+        [RegularExpression(@"^[+]?\d+(\.\d+)?$", ErrorMessage = "Voer een geldig telefoonnummer in")]
+        [StringLength(12, MinimumLength = 10, ErrorMessage ="Voer een geldig telefoonnummer in")]
         public string Telefoon { get; set; }
         public string Straatnaam { get; set; }
         public string Huisnummer { get; set; }

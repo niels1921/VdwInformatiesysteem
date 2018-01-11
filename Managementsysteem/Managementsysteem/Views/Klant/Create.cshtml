@@ -1,5 +1,9 @@
 ﻿@model Managementsysteem.Models.Klant
 
+@Html.LabelFor(model => model.Telefoon)
+@Html.EditorFor(model => model.Telefoon)
+@Html.ValidationMessageFor(model => model.Telefoon)
+
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
