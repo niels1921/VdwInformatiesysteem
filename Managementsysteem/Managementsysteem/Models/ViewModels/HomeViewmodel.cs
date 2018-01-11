@@ -5,9 +5,10 @@ using System.Threading.Tasks;
 
 namespace Managementsysteem.Models.ViewModels
 {
-    public class ProjectViewmodel
+    public class HomeViewmodel
     {
-        public Klant Klant { get; set; }
+        public Taak Taak{ get; set; }
         public Project Project { get; set; }
+        public Afspraak Afspraak { get; set; }
     }
 }
