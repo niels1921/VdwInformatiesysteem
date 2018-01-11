@@ -11,8 +11,8 @@ using System;
 namespace Managementsysteem.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180111103614_klaas12")]
-    partial class klaas12
+    [Migration("20180111112211_klaas16")]
+    partial class klaas16
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -123,23 +123,30 @@ namespace Managementsysteem.Data.Migrations
 
                     b.Property<string>("Contactpersoon");
 
-                    b.Property<string>("Email");
+                    b.Property<string>("Email")
+                        .IsRequired();
 
-                    b.Property<string>("Huisnummer");
+                    b.Property<string>("Huisnummer")
+                        .IsRequired()
+                        .HasMaxLength(4);
 
                     b.Property<string>("Naam")
                         .IsRequired();
 
-                    b.Property<string>("Postcode");
+                    b.Property<string>("Postcode")
+                        .IsRequired();
 
                     b.Property<string>("Profiel_foto");
 
-                    b.Property<string>("Straatnaam");
+                    b.Property<string>("Straatnaam")
+                        .IsRequired();
 
                     b.Property<string>("Telefoon")
+                        .IsRequired()
                         .HasMaxLength(12);
 
-                    b.Property<string>("Woonplaats");
+                    b.Property<string>("Woonplaats")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
