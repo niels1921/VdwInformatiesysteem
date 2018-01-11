@@ -30,7 +30,7 @@ namespace Managementsysteem.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                projecten = projecten.Where(s => s.Naam.Contains(searchString));
+                projecten = projecten.Where(s => s.Naam.Contains(searchString) || s.Klant.Naam.Contains(searchString));
             }
             return View(await projecten.ToListAsync());
         }

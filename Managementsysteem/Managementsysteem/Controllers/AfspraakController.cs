@@ -20,10 +20,45 @@ namespace Managementsysteem.Controllers
         }
 
         // GET: Afspraak
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder, string CurrentFilter, string searchString, int? page)
         {
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = CurrentFilter;
+            }
+
+            ViewData["CurrentFilter"] = searchString;
+
             var applicationDbContext = _context.Afspraak.Include(a => a.Klant).Include(a => a.Project);
-            return View(await applicationDbContext.ToListAsync());
+            var afspraken = from a in _context.Afspraak.Include(a => a.Project).Include(a => a.Klant)
+                            select a;
+            switch (sortOrder)
+            {
+                case "Date":
+                    afspraken = afspraken.OrderBy(a => a.Datum);
+                    break;
+                case "date_desc":
+                    afspraken = afspraken.OrderByDescending(a => a.Datum);
+                    break;
+                default:
+                    afspraken = afspraken.OrderBy(a => a.Klant);
+                    break;
+            }
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                afspraken = afspraken.Where(s => s.Klant.Naam.Contains(searchString));
+            }
+
+            int pageSize = 3;
+            return View(await ContosoUniversity.PaginatedList<Afspraak>.CreateAsync(afspraken.AsNoTracking(), page ?? 1, pageSize));
         }
 
         // GET: Afspraak/Details/5
