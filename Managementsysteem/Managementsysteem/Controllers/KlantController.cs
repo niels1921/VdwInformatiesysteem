@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Hosting;
 using Managementsysteem.Data;
 using Microsoft.AspNetCore.Hosting.Internal;
 using System.Net.Http.Headers;
+using Managementsysteem.Models.ViewModels;
 
 namespace Managementsysteem.Controllers
 {
@@ -27,6 +28,15 @@ namespace Managementsysteem.Controllers
             _context = context;
             _Environment = environment;
 
+        }
+
+        public IActionResult Project()
+        {
+            var KlantId = TempData["Id"];
+
+            TempData["klant"] = KlantId;
+
+            return RedirectToAction("Create", "Project");
         }
 
 
@@ -51,6 +61,9 @@ namespace Managementsysteem.Controllers
             {
                 return NotFound();
             }
+
+            TempData["Id"] = id;
+
 
             return View(klant);
         }

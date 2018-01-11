@@ -7,11 +7,13 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Managementsysteem.Data;
 using Managementsysteem.Models;
+using Microsoft.ApplicationInsights.Extensibility.Implementation;
 
 namespace Managementsysteem.Controllers
 {
     public class ProjectController : Controller
     {
+
         private readonly ApplicationDbContext _context;
 
         public ProjectController(ApplicationDbContext context)
@@ -66,16 +68,29 @@ namespace Managementsysteem.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Naam,Status,Taak_Id,Klant_Id,Omschrijving,Startdatum,Deadline")] Project project)
+        public async Task<IActionResult> Create( [Bind("Id,Naam,Status,Taak_Id,Klant_Id,Omschrijving,Startdatum,Deadline")] Project project)
         {
+            int klant_id = new int();
+            //Check if your Student exists within the TempData
+            if (TempData.ContainsKey("klant"))
+            {
+                //If so access it here
+               klant_id = Convert.ToInt32(TempData["klant"]);
+            }
+
+
             if (ModelState.IsValid)
             {
+                project.Klant_Id = klant_id;
+
                 _context.Add(project);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             var status = new List<string> { "Nog inplannen", "Ingepland", "In progress", "Afgerond" };
             ViewData["Status"] = new SelectList(status);
+
+            
 
             ViewData["Klant_Id"] = new SelectList(_context.Klant, "Id", "Naam", project.Klant_Id);
             return View(project);

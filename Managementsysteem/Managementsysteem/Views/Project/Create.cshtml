@@ -1,11 +1,18 @@
 ﻿@model Managementsysteem.Models.Project
 
 @{
-    ViewData["Title"] = "Create";
+    var klant = ViewContext.RouteData.Values["klant"];
+
+    ViewData["Title"] = klant;
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    
+
 }
 
-<h2>Create</h2>
+
+
+<h2>@ViewData["Title"]</h2>
 
 <h4>Project</h4>
 <hr />
@@ -22,10 +29,10 @@
                 <label asp-for="Status" class="control-label"></label>
                 <select asp-for="Status" class="form-control" asp-items="ViewBag.Status"></select>
             </div>
-            <div class="form-group">
+            @*<div class="form-group">
                 <label asp-for="Klant_Id" class="control-label"></label>
-                <select asp-for="Klant_Id" class ="form-control" asp-items="ViewBag.Klant_Id"></select>
-            </div>
+                <select asp-for="Klant_Id" class="form-control" asp-items="ViewBag.Klant_Id"></select>
+            </div>*@
             <div class="form-group">
                 <label asp-for="Omschrijving" class="control-label"></label>
                 <input asp-for="Omschrijving" class="form-control" />
