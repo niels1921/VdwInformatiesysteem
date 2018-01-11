@@ -12,8 +12,11 @@ namespace Managementsysteem.Models
     {
         [Key]
         public int Id { get; set; }
-        [Required]
+
+        [Required(ErrorMessage = "*voer een naam in")]
+        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Voer alleen letters in")]
         public string Naam { get; set; }
+
         public string Status { get; set; }
 
         [DisplayName("Klant")]
@@ -22,7 +25,11 @@ namespace Managementsysteem.Models
         public Klant Klant { get; set; }
 
         public string Omschrijving { get; set; }
+
+        [Required(ErrorMessage = "*voer een startdatum in")]
         public DateTime Startdatum { get; set; }
+
+        [Required(ErrorMessage = "*voer een deadline in")]
         public DateTime Deadline { get; set; }
 
 
