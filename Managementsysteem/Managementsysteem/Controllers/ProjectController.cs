@@ -21,6 +21,16 @@ namespace Managementsysteem.Controllers
             _context = context;
         }
 
+        public IActionResult Taak()
+        {
+            var ProjectId = TempData["Id"];
+
+            TempData["project"] = ProjectId;
+
+            return RedirectToAction("Create", "Taak");
+        }
+
+
         // GET: Project
         public async Task<IActionResult> Index(string searchString)
         {
