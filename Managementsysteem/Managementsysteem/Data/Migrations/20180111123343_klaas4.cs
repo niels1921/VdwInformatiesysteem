@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Managementsysteem.Data.Migrations
 {
-    public partial class klaas : Migration
+    public partial class klaas4 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

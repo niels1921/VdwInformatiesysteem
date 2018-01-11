@@ -11,8 +11,8 @@ using System;
 namespace Managementsysteem.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180111121834_klaas")]
-    partial class klaas
+    [Migration("20180111123343_klaas4")]
+    partial class klaas4
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
