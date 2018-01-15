@@ -61,17 +61,17 @@ namespace Managementsysteem.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Naam,Project_Id,Omschrijving,Datum,VerwachteUren,GewerkteUren,User_id,Image")] Taak taak)
         {
-            int project_id = new int();
-            //Check if your Student exists within the TempData
-            if (TempData.ContainsKey("project"))
-            {
-                //If so access it here
-                project_id = Convert.ToInt32(TempData["project"]);
-            }
+            //int project_id = new int();
+            ////Check if your Student exists within the TempData
+            //if (TempData.ContainsKey("project"))
+            //{
+            //    //If so access it here
+            //    project_id = Convert.ToInt32(TempData["project"]);
+            //}
 
             if (ModelState.IsValid)
             {
-                taak.Project_Id = project_id;
+                //taak.Project_Id = project_id;
                 _context.Add(taak);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
