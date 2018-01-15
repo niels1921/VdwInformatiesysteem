@@ -3,46 +3,44 @@
 }
 @model Managementsysteem.Models.ViewModels.HomeViewmodel
 
-
-
 <div class="row">
     <div class="col-md-4">
         <h2>Taken</h2>
-
-        @foreach (Taak taak in Model.Taak)
+        <div class="col-md-6 bg_grey onderlijning">Taak</div>
+        <div class="col-md-6 onderlijning">Omschrijving</div>
+       @foreach (Taak taak in Model.Taak)
         {
-            <tr>
-                <td>@taak.Naam</td>
-                <td>@taak.Omschrijving</td>
-                
-            </tr>
+           <div class="col-md-12">
+                <div class="col-md-6 bg_grey">@taak.Naam</div>
+                <div class="col-md-6">@taak.Omschrijving</div>
+           </div>
+           
         }
 
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4 bg_grey">
         <h2>Projecten</h2>
 
-        @foreach (Project project in Model.Project)
-    {
-        <tr>
-            <td>@project.Naam</td>
-            <td>@project.Omschrijving</td>
+       @foreach (Project project in Model.Project)
+        {
+            <div class="col-md-12">
+                <div class="col-md-6">@project.Naam</div>
+                <div class="col-md-6">@project.Omschrijving</div>
+            </div>
 
-        </tr>
-}
+        }
 
     </div>
     <div class="col-md-4">
         <h2>Afspraken</h2>
 
-        @foreach (Afspraak afspraak in Model.Afspraak)
-    {
-        <tr>
-            <td>@afspraak.Omschrijving</td>
-            <td>@afspraak.Datum</td>
-
-        </tr>
-}
+       @foreach (Afspraak afspraak in Model.Afspraak)
+        {
+            <div class="col-md-12">
+                <div class="col-md-6">@afspraak.Omschrijving</div>
+                <div class="col-md-6">@afspraak.Datum</div>
+            </div>
+        }
 
     </div>
-</div>
+    </div>
