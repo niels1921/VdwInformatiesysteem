@@ -6,49 +6,51 @@
 }
 
 <h2>Index</h2>
-
-<form asp-controller="Project" asp-action="Index" method="get">
-    <p>
-        Title: <input type="text" name="SearchString">
-        <input type="submit" value="Zoek" />
-    </p>
-</form>
-
-
-
+@*dfgiodfsugs*@
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
 <table class="table">
     <thead>
         <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Naam)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Omschrijving)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Datum)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.VerwachteUren)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.GewerkteUren)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Image)
+                </th>
             <th>
-                @Html.DisplayNameFor(model => model.Naam)
+                @Html.DisplayNameFor(model => model.Project)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Datum)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Omschrijving)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.VerwachteUren)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.GewerkteUren)
+                @Html.DisplayNameFor(model => model.Werknemer)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
-        {
+@foreach (var item in Model) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Naam)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Datum)
+                @Html.DisplayFor(modelItem => item.Omschrijving)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Omschrijving)
+                @Html.DisplayFor(modelItem => item.Datum)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.VerwachteUren)
@@ -57,7 +59,13 @@
                 @Html.DisplayFor(modelItem => item.GewerkteUren)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Werknemer)
+                @Html.DisplayFor(modelItem => item.Image)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Project.Naam)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Werknemer.Id)
             </td>
             <td>
                 <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id">Bewerk</a>
@@ -65,6 +73,6 @@
                 <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Verwijder</a>
             </td>
         </tr>
-        }
+}
     </tbody>
 </table>
