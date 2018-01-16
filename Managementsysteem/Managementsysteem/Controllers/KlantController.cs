@@ -32,14 +32,12 @@ namespace Managementsysteem.Controllers
 
         public IActionResult Project()
         {
-            var KlantId = TempData["Id"];
+            var KlantId = TempData["KlantId"];
 
             TempData["klant"] = KlantId;
 
             return RedirectToAction("Create", "Project");
         }
-
-
 
         // GET: Klant
         public async Task<IActionResult> Index(string searchString)
@@ -58,6 +56,7 @@ namespace Managementsysteem.Controllers
         // GET: Klant/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            TempData["KlantId"] = id;
             KlantViewmodel klantmodel = new KlantViewmodel();
 
             var Klanten = from Klant in _context.Klant
