@@ -1,4 +1,4 @@
-﻿@model Managementsysteem.Models.Project
+﻿@model Managementsysteem.Models.ViewModels.ProjectViewmodel
 
 @{
     ViewData["Title"] = "Details";
@@ -11,50 +11,80 @@
     <h4>Project</h4>
     <hr />
     <dl class="dl-horizontal">
-        
-        
+
+
         <dt>
-            @Html.DisplayNameFor(model => model.Naam)
+            @Html.DisplayNameFor(model => model.Project.Naam)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Naam)
+            @Html.DisplayFor(model => model.Project.Naam)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Status)
+            @Html.DisplayNameFor(model => model.Project.Status)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Status)
+            @Html.DisplayFor(model => model.Project.Status)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Omschrijving)
+            @Html.DisplayNameFor(model => model.Project.Omschrijving)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Omschrijving)
+            @Html.DisplayFor(model => model.Project.Omschrijving)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Startdatum)
+            @Html.DisplayNameFor(model => model.Project.Startdatum)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Startdatum)
+            @Html.DisplayFor(model => model.Project.Startdatum)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Deadline)
+            @Html.DisplayNameFor(model => model.Project.Deadline)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Deadline)
+            @Html.DisplayFor(model => model.Project.Deadline)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Klant)
+            @Html.DisplayNameFor(model => model.Project.Klant)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Klant.Naam)
+            @Html.DisplayFor(model => model.Project.Klant.Naam)
         </dd>
     </dl>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a> |
-     <a asp-controller="Project" asp-action="Taak">Nieuwe Taak</a>
 
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Project.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a> |
+    <a asp-controller="Project" asp-action="Taak">Nieuwe Taak</a> |
+    <a asp-controller="Project" asp-action="Gebeurtenis">Nieuwe Gebeurtenis</a>
+
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <h2>Taken</h2>
+
+        @foreach (Taak taak in Model.Taak)
+        {
+            <tr>
+                <td>@taak.Naam</td>
+                <td>@taak.Omschrijving</td>
+
+            </tr>
+        }
+
+    </div>
+    <div class="col-md-6">
+        <h2>Gebeurtenissen</h2>
+
+        @foreach (Gebeurtenis gebeurtenis in Model.Gebeurtenis)
+        {
+            <tr>
+                <td>@gebeurtenis.Beschrijving</td>
+
+            </tr>
+        }
+
+    </div>
 </div>

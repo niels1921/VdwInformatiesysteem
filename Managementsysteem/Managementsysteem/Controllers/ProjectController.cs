@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Managementsysteem.Data;
 using Managementsysteem.Models;
 using Microsoft.ApplicationInsights.Extensibility.Implementation;
+using Managementsysteem.Models.ViewModels;
 
 namespace Managementsysteem.Controllers
 {
@@ -21,9 +22,19 @@ namespace Managementsysteem.Controllers
             _context = context;
         }
 
+
+        public IActionResult Gebeurtenis()
+        {
+            var ProjectId = TempData["Id"];
+
+            TempData["project"] = ProjectId;
+
+            return RedirectToAction("Create", "Gebeurtenis");
+        }
+
         public IActionResult Taak()
         {
-            var ProjectId = TempData["ProjectId"];
+            var ProjectId = TempData["Id"];
 
             TempData["project"] = ProjectId;
 
@@ -48,22 +59,27 @@ namespace Managementsysteem.Controllers
         // GET: Project/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            ProjectViewmodel projectmodel = new ProjectViewmodel();
 
-            var project = await _context.Project
-                .Include(p => p.Klant)
-                .SingleOrDefaultAsync(m => m.Id == id);
-            if (project == null)
-            {
-                return NotFound();
-            }
+        
 
-            TempData["ProjectId"] = id;
+            var Projecten = from Project in _context.Project
+                            select Project;
 
-            return View(project);
+            var project = Projecten.First(i => i.Id == id);
+
+            var Taken = from Taak in _context.Taak
+                        where Taak.Project_Id == id
+                        select Taak;
+
+            var Gebeurtenissen = from Gebeurtenis in _context.Gebeurtenis
+                                 where Gebeurtenis.Project_Id == id
+                                 select Gebeurtenis;
+
+            projectmodel.Taak = Taken;
+            projectmodel.Gebeurtenis = Gebeurtenissen;
+            projectmodel.Project = project;
+            return View(projectmodel);
         }
 
         // GET: Project/Create

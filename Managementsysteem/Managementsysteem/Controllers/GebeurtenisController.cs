@@ -59,8 +59,17 @@ namespace Managementsysteem.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Beschrijving,Datum,Project_Id")] Gebeurtenis gebeurtenis)
         {
+            int project_id = new int();
+            if (TempData.ContainsKey("project"))
+            {
+                //If so access it here
+                project_id = Convert.ToInt32(TempData["project"]);
+            }
+
             if (ModelState.IsValid)
             {
+                gebeurtenis.Project_Id = project_id;
+
                 _context.Add(gebeurtenis);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
