@@ -39,8 +39,6 @@ namespace Managementsysteem.Controllers
             return RedirectToAction("Create", "Project");
         }
 
-
-
         // GET: Klant
         public async Task<IActionResult> Index(string searchString)
         {
@@ -58,22 +56,21 @@ namespace Managementsysteem.Controllers
         // GET: Klant/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var klant = await _context.Klant
-                .SingleOrDefaultAsync(m => m.Id == id);
-            if (klant == null)
-            {
-                return NotFound();
-            }
-
             TempData["KlantId"] = id;
+            KlantViewmodel klantmodel = new KlantViewmodel();
 
+            var Klanten = from Klant in _context.Klant
+                            select Klant;
 
-            return View(klant);
+            var klant = Klanten.First(i => i.Id == id);
+
+            var Projecten = from Project in _context.Project
+                        where Project.Id == id
+                        select Project;
+
+            klantmodel.Klant = klant;
+            klantmodel.Project = Projecten;
+            return View(klantmodel);
         }
 
         // GET: Klant/Create
