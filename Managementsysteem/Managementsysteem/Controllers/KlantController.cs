@@ -58,22 +58,20 @@ namespace Managementsysteem.Controllers
         // GET: Klant/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            KlantViewmodel klantmodel = new KlantViewmodel();
 
-            var klant = await _context.Klant
-                .SingleOrDefaultAsync(m => m.Id == id);
-            if (klant == null)
-            {
-                return NotFound();
-            }
+            var Klanten = from Klant in _context.Klant
+                            select Klant;
 
-            TempData["Id"] = id;
+            var klant = Klanten.First(i => i.Id == id);
 
+            var Projecten = from Project in _context.Project
+                        where Project.Id == id
+                        select Project;
 
-            return View(klant);
+            klantmodel.Klant = klant;
+            klantmodel.Project = Projecten;
+            return View(klantmodel);
         }
 
         // GET: Klant/Create
