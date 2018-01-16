@@ -13,6 +13,7 @@ using Managementsysteem.Models;
 using Managementsysteem.Services;
 using Microsoft.Extensions.FileProviders;
 using System.IO;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace Managementsysteem
 {
@@ -31,7 +32,28 @@ namespace Managementsysteem
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
+            services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+            {
+                //Settings for passwords
+                options.Password.RequireDigit = false;
+                options.Password.RequiredLength = 6;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireLowercase = true;
+                options.Password.RequiredUniqueChars = 2;
+                //Settings for Lockout
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(2);
+                options.Lockout.MaxFailedAccessAttempts = 3;
+                options.Lockout.AllowedForNewUsers = true;
+                //Sign in settings
+                options.SignIn.RequireConfirmedEmail = false;
+                options.SignIn.RequireConfirmedPhoneNumber = false;
+                //Validation settings
+                options.User.RequireUniqueEmail = true;
+
+
+            })
+                                 
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
@@ -47,8 +69,9 @@ namespace Managementsysteem
   
 
 
+
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -71,6 +94,51 @@ namespace Managementsysteem
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            MaakRollen(serviceProvider).Wait();
+
         }
+
+      private async Task MaakRollen(IServiceProvider serviceProvider)
+        {
+            // Add custom Roles
+            var rolemanager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var usermanager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+            string[] roleNames = { "Admin", "Manager", "Employee", "Customer" };
+            IdentityResult roleResult;
+
+            foreach (var rolename in roleNames)
+            {
+                var RoleExist = await rolemanager.RoleExistsAsync(rolename);
+                if(!RoleExist)
+                {
+                    roleResult = await rolemanager.CreateAsync(new IdentityRole(rolename));
+                }
+            }
+
+            var Poweruser = new ApplicationUser
+            {
+                UserName = Configuration.GetSection("UserSettings")["UserEmail"],
+                Email = Configuration.GetSection("UserSettings")["UserEmail"],
+            };
+
+            string UserPassword = Configuration.GetSection("UserSettings")["UserPassword"];
+            var _user = await usermanager.FindByEmailAsync(Configuration.GetSection("UserSettings")["UserEmail"]);
+
+            if (_user == null)
+            {
+                var CreatePowerUser = await usermanager.CreateAsync(Poweruser, UserPassword);
+                if (CreatePowerUser.Succeeded)
+                {
+                    await usermanager.AddToRoleAsync(Poweruser, "Admin");
+                }
+            }
+
+
+
+        }
+
+
+
     }
 }
