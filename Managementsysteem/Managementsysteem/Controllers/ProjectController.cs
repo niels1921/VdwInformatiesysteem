@@ -22,6 +22,16 @@ namespace Managementsysteem.Controllers
             _context = context;
         }
 
+
+        public IActionResult Gebeurtenis()
+        {
+            var ProjectId = TempData["Id"];
+
+            TempData["project"] = ProjectId;
+
+            return RedirectToAction("Create", "Gebeurtenis");
+        }
+
         public IActionResult Taak()
         {
             var ProjectId = TempData["Id"];
