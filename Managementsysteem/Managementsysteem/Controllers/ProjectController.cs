@@ -69,10 +69,12 @@ namespace Managementsysteem.Controllers
             var project = Projecten.First(i => i.Id == id);
 
             var Taken = from Taak in _context.Taak
+                        where Taak.Project_Id == id
                         select Taak;
 
             var Gebeurtenissen = from Gebeurtenis in _context.Gebeurtenis
-                            select Gebeurtenis;
+                                 where Gebeurtenis.Project_Id == id
+                                 select Gebeurtenis;
 
             projectmodel.Taak = Taken;
             projectmodel.Gebeurtenis = Gebeurtenissen;

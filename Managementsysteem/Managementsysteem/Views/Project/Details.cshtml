@@ -52,9 +52,39 @@
         </dd>
     </dl>
 </div>
+
 <div>
     <a asp-action="Edit" asp-route-id="@Model.Project.Id">Edit</a> |
     <a asp-action="Index">Back to List</a> |
-    <a asp-controller="Project" asp-action="Taak">Nieuwe Taak</a>
+    <a asp-controller="Project" asp-action="Taak">Nieuwe Taak</a> |
+    <a asp-controller="Project" asp-action="Gebeurtenis">Nieuwe Gebeurtenis</a>
 
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <h2>Taken</h2>
+
+        @foreach (Taak taak in Model.Taak)
+        {
+            <tr>
+                <td>@taak.Naam</td>
+                <td>@taak.Omschrijving</td>
+
+            </tr>
+        }
+
+    </div>
+    <div class="col-md-6">
+        <h2>Gebeurtenissen</h2>
+
+        @foreach (Gebeurtenis gebeurtenis in Model.Gebeurtenis)
+        {
+            <tr>
+                <td>@gebeurtenis.Beschrijving</td>
+
+            </tr>
+        }
+
+    </div>
 </div>
