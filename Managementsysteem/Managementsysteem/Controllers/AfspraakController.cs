@@ -42,10 +42,10 @@ namespace Managementsysteem.Controllers
             switch (sortOrder)
             {
                 case "Date":
-                    afspraken = afspraken.OrderBy(a => a.Datum);
+                    afspraken = afspraken.OrderBy(a => a.Start);
                     break;
                 case "date_desc":
-                    afspraken = afspraken.OrderByDescending(a => a.Datum);
+                    afspraken = afspraken.OrderByDescending(a => a.Start);
                     break;
                 default:
                     afspraken = afspraken.OrderBy(a => a.Klant);
