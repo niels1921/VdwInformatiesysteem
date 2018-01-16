@@ -8,26 +8,36 @@ using Managementsysteem.Models;
 using Microsoft.AspNetCore.Authorization;
 using Managementsysteem.Models.ViewModels;
 using Managementsysteem.Data;
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 
 namespace Managementsysteem.Controllers
 {
 
     public class HomeController : Controller
     {
+
         private readonly ApplicationDbContext _context;
 
         public HomeController(ApplicationDbContext context)
         {
             _context = context;
+
         }
+
+
+
 
         public IActionResult Index()
         {
-            ViewBag.Message = "Welcome to my demo!";
+            string userId = this.User.FindFirstValue(System.Security.Claims.ClaimTypes.NameIdentifier);
+
+
             HomeViewmodel mymodel = new HomeViewmodel();
 
             var Taken = from Taak in _context.Taak
-                                    select Taak;
+                    //    where Taak.User_id == userId
+                        select Taak;
 
             var Projecten = from Project in _context.Project
                         select Project;

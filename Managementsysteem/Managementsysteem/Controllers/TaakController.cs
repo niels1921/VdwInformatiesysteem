@@ -49,8 +49,8 @@ namespace Managementsysteem.Controllers
         // GET: Taak/Create
         public IActionResult Create()
         {
-            ViewData["Project_Id"] = new SelectList(_context.Project, "Id", "Naam");
-            ViewData["User_id"] = new SelectList(_context.Users, "Id", "Id");
+            //ViewData["Project_Id"] = new SelectList(_context.Project, "Id", "Naam");
+            ViewData["User_id"] = new SelectList(_context.Users, "Id", "UserName");
             return View();
         }
 
@@ -62,15 +62,24 @@ namespace Managementsysteem.Controllers
         public async Task<IActionResult> Create([Bind("Id,Naam,Project_Id,Omschrijving,Datum,VerwachteUren,GewerkteUren,User_id,Image")] Taak taak)
         {
 
+            int project_id = new int();
+            if (TempData.ContainsKey("project"))
+            {
+                project_id = Convert.ToInt32(TempData["project"]);
+            }
+
+
             if (ModelState.IsValid)
             {
+
+                taak.Project_Id = project_id;
 
                 _context.Add(taak);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Project_Id"] = new SelectList(_context.Project, "Id", "Naam", taak.Project_Id);
-            ViewData["User_id"] = new SelectList(_context.Users, "Id", "Id", taak.User_id);
+            //ViewData["Project_Id"] = new SelectList(_context.Project, "Id", "Naam", taak.Project_Id);
+            ViewData["User_id"] = new SelectList(_context.Users, "Id", "UserName", taak.User_id);
             return View(taak);
         }
 

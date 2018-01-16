@@ -32,7 +32,7 @@ namespace Managementsysteem.Controllers
 
         public IActionResult Project()
         {
-            var KlantId = TempData["Id"];
+            var KlantId = TempData["KlantId"];
 
             TempData["klant"] = KlantId;
 
@@ -70,7 +70,7 @@ namespace Managementsysteem.Controllers
                 return NotFound();
             }
 
-            TempData["Id"] = id;
+            TempData["KlantId"] = id;
 
 
             return View(klant);

@@ -23,7 +23,7 @@ namespace Managementsysteem.Controllers
 
         public IActionResult Taak()
         {
-            var ProjectId = TempData["Id"];
+            var ProjectId = TempData["ProjectId"];
 
             TempData["project"] = ProjectId;
 
@@ -60,6 +60,8 @@ namespace Managementsysteem.Controllers
             {
                 return NotFound();
             }
+
+            TempData["ProjectId"] = id;
 
             return View(project);
         }
