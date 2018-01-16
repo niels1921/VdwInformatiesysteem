@@ -1,5 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+
 }
 @model Managementsysteem.Models.ViewModels.HomeViewmodel
 
@@ -11,11 +13,12 @@
 
         @foreach (Taak taak in Model.Taak)
         {
-            <tr>
-                <td>@taak.Naam</td>
-                <td>@taak.Omschrijving</td>
-                
-            </tr>
+        <div class="row">
+            <div class="col-lg-6">@taak.Naam</div>
+            <a class="btn btn-info" asp-controller="Taak" asp-action="Details" asp-route-id="@taak.Id">Bekijk</a>
+
+
+        </div>
         }
 
     </div>
@@ -24,11 +27,13 @@
 
         @foreach (Project project in Model.Project)
     {
-        <tr>
-            <td>@project.Naam</td>
-            <td>@project.Omschrijving</td>
 
-        </tr>
+        <div class="row">
+            <div class="col-lg-6">@project.Naam</div>
+            <div class="col-lg-6">
+                        <a class="btn btn-info" asp-controller="Project" asp-action="Details" asp-route-id="@project.Id">Bekijk</a>
+                    </div>
+        </div>
 }
 
     </div>
@@ -37,11 +42,14 @@
 
         @foreach (Afspraak afspraak in Model.Afspraak)
     {
-        <tr>
-            <td>@afspraak.Omschrijving</td>
-            <td>@afspraak.Datum</td>
 
-        </tr>
+        <div class="row">
+            <div class="col-lg-6">@afspraak.Omschrijving</div>
+            <div class="col-lg-6">
+                @afspraak.Datum
+                        <a class="btn btn-info" asp-controller="Afspraak" asp-action="Details" asp-route-id="@afspraak.Id">Bekijk</a>
+             </div>
+        </div>
 }
 
     </div>

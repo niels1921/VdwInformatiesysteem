@@ -25,7 +25,7 @@ namespace Managementsysteem.Controllers
 
         public IActionResult Gebeurtenis()
         {
-            var ProjectId = TempData["Id"];
+            var ProjectId = TempData["ProjectId"];
 
             TempData["project"] = ProjectId;
 
@@ -79,6 +79,10 @@ namespace Managementsysteem.Controllers
             projectmodel.Taak = Taken;
             projectmodel.Gebeurtenis = Gebeurtenissen;
             projectmodel.Project = project;
+
+            TempData["ProjectId"] = id;
+
+
             return View(projectmodel);
         }
 
