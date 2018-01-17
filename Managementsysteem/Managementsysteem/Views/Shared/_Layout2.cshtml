@@ -16,6 +16,7 @@
     <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
     <!-- Custom styles for this template-->
     <link href="css/sb-admin.css" rel="stylesheet">
+    <link href="css/site.css" rel="stylesheet">
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -26,6 +27,9 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
+            <div class="nav-item ml-auto">
+                @await Html.PartialAsync("_LoginPartial")
+            </div>
             <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
                     <a class="nav-link" asp-controller="Home" asp-action="Index">
@@ -41,7 +45,7 @@
                 </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Klanten">
                     <a class="nav-link" asp-area="" asp-controller="Klant" asp-action="Index">
-                        <i class="fa fa-fw fa-address-book" ></i>
+                        <i class="fa fa-fw fa-address-book"></i>
                         <span class="nav-link-text">Klanten</span>
                     </a>
                 </li>
