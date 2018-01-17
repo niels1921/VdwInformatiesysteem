@@ -27,6 +27,13 @@ namespace Managementsysteem.Controllers
 
         }
 
+        public IActionResult Index()
+        {
+
+            return View();
+
+        }
+
         //// GET: Afspraak
         //public async Task<IActionResult> Index(string sortOrder, string CurrentFilter, string searchString, int? page)
         //{
