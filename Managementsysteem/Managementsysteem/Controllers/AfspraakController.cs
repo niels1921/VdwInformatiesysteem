@@ -19,6 +19,7 @@ namespace Managementsysteem.Controllers
             _context = context;
         }
 
+        //[Authorize(Roles = "Employee, Manager, Admin")]
         public IActionResult Afspraken()
         {
 

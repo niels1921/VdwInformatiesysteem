@@ -87,6 +87,7 @@ namespace Managementsysteem.Controllers
         }
 
         // GET: Project/Create
+        //[Authorize(Roles = "Employee, Manager, Admin")]
         public IActionResult Create()
         {
             var status = new List<string> {"Nog inplannen", "Ingepland", "In progress", "Afgerond" };
@@ -129,6 +130,7 @@ namespace Managementsysteem.Controllers
         }
 
         // GET: Project/Edit/5
+        //[Authorize(Roles = "Employee, Manager, Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -188,6 +190,7 @@ namespace Managementsysteem.Controllers
         }
 
         // GET: Project/Delete/5
+        //[Authorize(Roles = "Employee, Manager, Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -222,6 +225,6 @@ namespace Managementsysteem.Controllers
             return _context.Project.Any(e => e.Id == id);
         }
 
-        //i love memes
+       
     }
 }

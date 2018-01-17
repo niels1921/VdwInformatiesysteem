@@ -18,7 +18,7 @@ namespace Managementsysteem.Controllers
         {
             _context = context;
         }
-        //dfsfsdfs
+       
         // GET: Taak
         public async Task<IActionResult> Index()
         {
@@ -27,6 +27,7 @@ namespace Managementsysteem.Controllers
         }
 
         // GET: Taak/Details/5
+        //[Authorize(Roles = "Employee, Manager, Admin")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -47,6 +48,7 @@ namespace Managementsysteem.Controllers
         }
 
         // GET: Taak/Create
+        //[Authorize(Roles = "Employee, Manager, Admin")]
         public IActionResult Create()
         {
             //ViewData["Project_Id"] = new SelectList(_context.Project, "Id", "Naam");
@@ -84,6 +86,7 @@ namespace Managementsysteem.Controllers
         }
 
         // GET: Taak/Edit/5
+        //[Authorize(Roles = "Employee, Manager, Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -139,6 +142,7 @@ namespace Managementsysteem.Controllers
         }
 
         // GET: Taak/Delete/5
+        //[Authorize(Roles = "Employee, Manager, Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
