@@ -120,6 +120,7 @@ namespace Managementsysteem.Controllers
         }
 
         // GET: Klant/Edit/5
+        //[Authorize(Roles = "Employee, Manager, Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -140,6 +141,7 @@ namespace Managementsysteem.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        
         public async Task<IActionResult> Edit(int id, [Bind("Id,Naam,Contactpersoon,Email,Telefoon,Straatnaam,Huisnummer,Postcode,Woonplaats,Profiel_foto")] Klant klant, IFormFile ProfilePictureFile)
         {
             if (id != klant.Id)
@@ -192,6 +194,7 @@ namespace Managementsysteem.Controllers
         }
 
         // GET: Klant/Delete/5
+        //[Authorize(Roles = "Employee, Manager, Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
