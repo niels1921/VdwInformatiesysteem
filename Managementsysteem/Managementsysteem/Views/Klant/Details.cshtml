@@ -1,8 +1,8 @@
-﻿@model Managementsysteem.Models.Klant
+﻿@model Managementsysteem.Models.ViewModels.KlantViewmodel
 
 @{
     ViewData["Title"] = "Details";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
 }
 
 <h2>Details</h2>
@@ -12,66 +12,82 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Id)
+            @Html.DisplayNameFor(model => model.Klant.Id)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Id)
+            @Html.DisplayFor(model => model.Klant.Id)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Naam)
+            @Html.DisplayNameFor(model => model.Klant.Naam)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Naam)
+            @Html.DisplayFor(model => model.Klant.Naam)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Contactpersoon)
+            @Html.DisplayNameFor(model => model.Klant.Contactpersoon)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Contactpersoon)
+            @Html.DisplayFor(model => model.Klant.Contactpersoon)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Email)
+            @Html.DisplayNameFor(model => model.Klant.Email)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Email)
+            @Html.DisplayFor(model => model.Klant.Email)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Telefoon)
+            @Html.DisplayNameFor(model => model.Klant.Telefoon)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Telefoon)
+            @Html.DisplayFor(model => model.Klant.Telefoon)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Straatnaam)
+            @Html.DisplayNameFor(model => model.Klant.Straatnaam)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Straatnaam)
+            @Html.DisplayFor(model => model.Klant.Straatnaam)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Huisnummer)
+            @Html.DisplayNameFor(model => model.Klant.Huisnummer)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Huisnummer)
+            @Html.DisplayFor(model => model.Klant.Huisnummer)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Postcode)
+            @Html.DisplayNameFor(model => model.Klant.Postcode)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Postcode)
+            @Html.DisplayFor(model => model.Klant.Postcode)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Woonplaats)
+            @Html.DisplayNameFor(model => model.Klant.Woonplaats)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Woonplaats)
+            @Html.DisplayFor(model => model.Klant.Woonplaats)
         </dd>
 
     </dl>
-    <img src="~/Uploads/@Model.Naam/@Model.Profiel_foto" class="profilePicture" />
+    <img src="~/Uploads/@Model.Klant.Naam/@Model.Klant.Profiel_foto" class="profilePicture" />
 </div>
 <div>
-    <a class="btn btn-warning" asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a class="btn btn-warning" asp-action="Edit" asp-route-id="@Model.Klant.Id">Edit</a> |
     <a class="btn btn-secondary" asp-action="Index">Back to List</a>
     <a class="btn btn-primary" asp-controller="Klant" asp-action="Project">Nieuw Project</a>
 
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>Projecten</h2>
+
+        @foreach (Project project in Model.Project)
+        {
+            <tr>
+                <td>@project.Naam</td>
+                <td>@project.Deadline</td>
+
+            </tr>
+        }
+
+    </div>
 </div>
