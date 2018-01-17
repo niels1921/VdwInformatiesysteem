@@ -69,15 +69,20 @@
         <div class="container-fluid">
             <!-- Breadcrumbs-->
             <ol class="breadcrumb">
-                <li class="breadcrumb-item">
-                    <a href="#">Dashboard</a>
-                </li>
-                <li class="breadcrumb-item active">My Dashboard</li>
+                        <li class="breadcrumb-item">
+                            @Html.ActionLink("Home", "Index", "Home")
+                            @if (ViewContext.RouteData.Values["controller"].ToString() != "Home")
+                   {
+                            @:> @Html.ActionLink(ViewContext.RouteData.Values["controller"].ToString(), "Index", ViewContext.RouteData.Values["controller"].ToString())
+                            @Html.DisplayText(ViewContext.RouteData.Values["controller"].ToString())
+                   }
+                            @if (ViewContext.RouteData.Values["action"].ToString() != "Index")
+                   {
+                            @:> @Html.ActionLink(ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["controller"].ToString())
+                   }
+                        </li>
             </ol>
-            <!-- Icon Cards-->
-
             @RenderBody()
-
         </div>
         <!-- Example DataTables Card-->
         <!-- /.container-fluid-->
