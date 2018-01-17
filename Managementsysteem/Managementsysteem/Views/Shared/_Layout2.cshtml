@@ -1,12 +1,9 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - V.D.W Automatisering</title>
     <!-- Bootstrap core CSS-->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -69,18 +66,18 @@
         <div class="container-fluid">
             <!-- Breadcrumbs-->
             <ol class="breadcrumb">
-                        <li class="breadcrumb-item">
-                            @Html.ActionLink("Home", "Index", "Home")
-                            @if (ViewContext.RouteData.Values["controller"].ToString() != "Home")
-                   {
-                            @:> @Html.ActionLink(ViewContext.RouteData.Values["controller"].ToString(), "Index", ViewContext.RouteData.Values["controller"].ToString())
-                            @Html.DisplayText(ViewContext.RouteData.Values["controller"].ToString())
-                   }
-                            @if (ViewContext.RouteData.Values["action"].ToString() != "Index")
-                   {
-                            @:> @Html.ActionLink(ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["controller"].ToString())
-                   }
-                        </li>
+                <li class="breadcrumb-item">
+                    @Html.ActionLink("Home", "Index", "Home")
+                    @if (ViewContext.RouteData.Values["controller"].ToString() != "Home")
+                    {
+                        @:> @Html.ActionLink(ViewContext.RouteData.Values["controller"].ToString(), "Index", ViewContext.RouteData.Values["controller"].ToString())
+                        @Html.DisplayText(ViewContext.RouteData.Values["controller"].ToString())
+                    }
+                    @if (ViewContext.RouteData.Values["action"].ToString() != "Index")
+                    {
+                        @:> @Html.ActionLink(ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["controller"].ToString())
+                    }
+                </li>
             </ol>
             @RenderBody()
         </div>
@@ -132,6 +129,8 @@
         <script src="js/sb-admin-datatables.min.js"></script>
         <script src="js/sb-admin-charts.min.js"></script>
     </div>
+    @RenderSection("Scripts", required: false)
+
 </body>
 
 </html>
