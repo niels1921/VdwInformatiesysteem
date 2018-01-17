@@ -2,3 +2,29 @@
 .padd{
     padding: 5px;
 }
+
+/* context menu icons */
+.icon:before {
+    position: absolute;
+    margin-left: 8px;
+    margin-top: 3px;
+    width: 14px;
+    height: 14px;
+    content: '';
+}
+
+.icon-blue:before {
+    background-color: #1066a8;
+}
+
+.icon-green:before {
+    background-color: #6aa84f;
+}
+
+.icon-yellow:before {
+    background-color: #f1c232;
+}
+
+.icon-red:before {
+    background-color: #cc0000;
+}
