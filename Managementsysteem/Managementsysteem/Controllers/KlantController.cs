@@ -14,6 +14,7 @@ using Managementsysteem.Data;
 using Microsoft.AspNetCore.Hosting.Internal;
 using System.Net.Http.Headers;
 using Managementsysteem.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Managementsysteem.Controllers
 {
@@ -77,6 +78,7 @@ namespace Managementsysteem.Controllers
         }
 
         // GET: Klant/Create
+        //[Authorize(Roles = "Employee, Manager, Admin")]
         public IActionResult Create()
         {
             return View();
@@ -225,6 +227,6 @@ namespace Managementsysteem.Controllers
         {
             return _context.Klant.Any(e => e.Id == id);
         }
-        // hi im gay lol
+        
     }
 }
