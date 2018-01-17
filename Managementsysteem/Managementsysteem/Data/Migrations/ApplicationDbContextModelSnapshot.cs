@@ -27,11 +27,20 @@ namespace Managementsysteem.Data.Migrations
 
                     b.Property<DateTime>("End");
 
+                    b.Property<int>("Klant_Id");
+
+                    b.Property<string>("Omschrijving")
+                        .IsRequired();
+
+                    b.Property<int>("Project_Id");
+
                     b.Property<DateTime>("Start");
 
-                    b.Property<string>("Text");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("Klant_Id");
+
+                    b.HasIndex("Project_Id");
 
                     b.ToTable("Afspraak");
                 });
@@ -307,6 +316,19 @@ namespace Managementsysteem.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("Managementsysteem.Models.Afspraak", b =>
+                {
+                    b.HasOne("Managementsysteem.Models.Klant", "Klant")
+                        .WithMany()
+                        .HasForeignKey("Klant_Id")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Managementsysteem.Models.Project", "Project")
+                        .WithMany()
+                        .HasForeignKey("Project_Id")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Managementsysteem.Models.Gebeurtenis", b =>

@@ -11,8 +11,8 @@ using System;
 namespace Managementsysteem.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180116125406_afspraakupdate")]
-    partial class afspraakupdate
+    [Migration("20180117102452_harm")]
+    partial class harm
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
