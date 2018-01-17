@@ -19,6 +19,13 @@ namespace Managementsysteem.Controllers
             _context = context;
         }
 
+        public IActionResult Afspraken()
+        {
+
+            return View();
+
+        }
+
         // GET: Afspraak
         public async Task<IActionResult> Index(string sortOrder, string CurrentFilter, string searchString, int? page)
         {
@@ -42,10 +49,10 @@ namespace Managementsysteem.Controllers
             switch (sortOrder)
             {
                 case "Date":
-                    afspraken = afspraken.OrderBy(a => a.Datum);
+                    afspraken = afspraken.OrderBy(a => a.Start);
                     break;
                 case "date_desc":
-                    afspraken = afspraken.OrderByDescending(a => a.Datum);
+                    afspraken = afspraken.OrderByDescending(a => a.Start);
                     break;
                 default:
                     afspraken = afspraken.OrderBy(a => a.Klant);

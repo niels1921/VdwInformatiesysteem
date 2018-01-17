@@ -12,8 +12,12 @@ namespace Managementsysteem.Models
     {
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "*kies een datum")]
-        public DateTime Datum { get; set; }
+
+        public DateTime Start { get; set; }
+        public DateTime End { get; set; }
+
+        public string Color { get; set; }
+
 
         [DisplayName("Klant ID")]
         public int Klant_Id { get; set; }
