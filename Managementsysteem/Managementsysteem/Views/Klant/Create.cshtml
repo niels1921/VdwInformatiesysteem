@@ -5,13 +5,12 @@
     Layout = "~/Views/Shared/_Layout2.cshtml";
 }
 
-<h2>Create</h2>
-
-<h4>Klant</h4>
+<h2>Nieuwe Klant</h2>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create" enctype="multipart/form-data">
+
+<form asp-action="Create" enctype="multipart/form-data">
+    <div class="col-md-12">
+        <div class="col-md-6 klantcol">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Naam" class="control-label"></label>
@@ -33,6 +32,24 @@
                 <input asp-for="Telefoon" class="form-control" />
                 <span asp-validation-for="Telefoon" class="text-danger"></span>
             </div>
+
+
+            <div class="form-group">
+                <label asp-for="Profiel_foto" class="col-md-2 control-label"></label>
+                <div class="col-md-10">
+                    @*<img src="~/Uploads/@Model.Naam/@Model.Profiel_foto" class="profilePicture" />*@
+                    <input type="hidden" asp-for="Profiel_foto" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input type="file" name="ProfilePictureFile" />
+                    <span asp-validation-for="Profiel_foto" class="text-danger"></span>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-6 klantcol">
             <div class="form-group">
                 <label asp-for="Straatnaam" class="control-label"></label>
                 <input asp-for="Straatnaam" class="form-control" />
@@ -55,29 +72,13 @@
             </div>
 
 
-            <div class="form-group">
-                <label asp-for="Profiel_foto" class="col-md-2 control-label"></label>
-                <div class="col-md-10">
-                    @*<img src="~/Uploads/@Model.Naam/@Model.Profiel_foto" class="profilePicture" />*@
-                    <input type="hidden" asp-for="Profiel_foto" />
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-2 control-label"></label>
-                <div class="col-md-10">
-                    <input type="file" name="ProfilePictureFile" />
-                    <span asp-validation-for="Profiel_foto" class="text-danger"></span>
-                </div>
-            </div>
+        </div>
 
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
-                </div>
-            </div>
-        </form>
+
+            <input type="submit" value="Create" class="btn btn-default" />
+
     </div>
-</div>
+</form>
 
 <div>
     <a asp-action="Index">Back to List</a>

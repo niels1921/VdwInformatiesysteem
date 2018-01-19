@@ -7,12 +7,20 @@
 
 <h2>Projecten</h2>
 
-<form asp-controller="Project" asp-action="Index" method="get">
-    <p>
-        Title: <input type="text" name="SearchString">
-        <input type="submit" value="Zoek" />
-    </p>
-</form>
+<div class="row search">
+    <div class="col-lg-6">
+        <form asp-controller="Project" asp-action="Index" method="get">
+
+            <div class="input-group">
+                <input type="text" class="form-control" name="SearchString" placeholder="Zoeken...">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit">Zoek!</button>
+                </span>
+            </div><!-- /input-group -->
+        </form>
+
+    </div><!-- /.col-lg-6 -->
+</div>
 
 
 
@@ -26,9 +34,6 @@
                 @Html.DisplayNameFor(model => model.Status)
             </th>
 
-            <th>
-                @Html.DisplayNameFor(model => model.Omschrijving)
-            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Startdatum)
             </th>
@@ -53,12 +58,7 @@
                     @Html.DisplayFor(modelItem => item.Status)
                 </td>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.Omschrijving)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Startdatum)
-                </td>
+
                 <td>
                     @Html.DisplayFor(modelItem => item.Deadline)
                 </td>

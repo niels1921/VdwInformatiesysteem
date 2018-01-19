@@ -7,80 +7,81 @@
 
 <h2>Klanten</h2>
 
-<form asp-controller="Klant" asp-action="Index" method="get">
-    <p>
-        Title: <input type="text" name="SearchString">
-        <input type="submit" value="Zoek" />
-    </p>
-</form>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Naam)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Contactpersoon)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Email)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Telefoon)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Straatnaam)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Huisnummer)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Postcode)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Woonplaats)
-                </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Naam)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Contactpersoon)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Telefoon)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Straatnaam)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Huisnummer)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Postcode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Woonplaats)
-            </td>
-            <td>
+<div class="row search">
+
+
+
+    <div class="col-lg-6">
+        <form asp-controller="Klant" asp-action="Index" method="get">
+
+            <div class="input-group">
+                <input type="text" class="form-control" name="SearchString" placeholder="Zoeken...">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit">Zoek!</button>
+                </span>
+            </div><!-- /input-group -->
+        </form>
+
+    </div><!-- /.col-lg-6 -->
+
+
+    <div class="col-lg-6">
+        <a asp-action="Create" class="btn btn-primary">Nieuwe klant</a>
+
+    </div>
+</div>
+<div class="col-md-12">
+
+@foreach (var item in Model)
+{
+
+    <div class="col-md-6 klant">
+        <div class="row">
+
+            <div class="col-md-6">
+                <img src="~/Uploads/@item.Naam/@item.Profiel_foto" class="profilePicture" />
+                <div class="knoppen">
                 <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id">Bewerk</a>
                 <a class="btn btn-info" asp-action="Details" asp-route-id="@item.Id">Bekijk</a>
                 <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Verwijder</a>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    @Html.DisplayFor(modelItem => item.Naam)
+                </div>
+                <div class="row">
+                    @Html.DisplayFor(modelItem => item.Contactpersoon)
+                </div>
+                <div class="row">
+                    @Html.DisplayFor(modelItem => item.Email)
+                </div>
+                <div class="row">
 
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+                    @Html.DisplayFor(modelItem => item.Telefoon)
+                </div>
+                <div class="row">
+                    @Html.DisplayFor(modelItem => item.Straatnaam)
+                </div>
+                <div class="row">
+
+                    @Html.DisplayFor(modelItem => item.Huisnummer)
+                </div>
+                <div class="row">
+
+                    @Html.DisplayFor(modelItem => item.Postcode)
+                </div>
+                <div class="row">
+
+                    @Html.DisplayFor(modelItem => item.Woonplaats)
+                </div>
+
+
+                </div>
+            </div>
+        <hr />    
+    </div>
+        
+        }
+    </div>
