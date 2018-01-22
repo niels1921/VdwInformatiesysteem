@@ -26,8 +26,6 @@ namespace Managementsysteem.Controllers
         }
 
 
-
-
         public IActionResult Index()
         {
             string userId = this.User.FindFirstValue(System.Security.Claims.ClaimTypes.NameIdentifier);
@@ -36,7 +34,7 @@ namespace Managementsysteem.Controllers
             HomeViewmodel mymodel = new HomeViewmodel();
 
             var Taken = from Taak in _context.Taak
-                    //    where Taak.User_id == userId
+                        where Taak.User_id == userId
                         select Taak;
 
             var Projecten = from Project in _context.Project
