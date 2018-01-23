@@ -110,11 +110,14 @@ namespace Managementsysteem.Controllers
                 //If so access it here
                klant_id = Convert.ToInt32(TempData["klant"]);
             }
+            DateTime today = DateTime.Today;
 
 
             if (ModelState.IsValid)
             {
                 project.Klant_Id = klant_id;
+
+                project.Startdatum = today;
 
                 _context.Add(project);
                 await _context.SaveChangesAsync();

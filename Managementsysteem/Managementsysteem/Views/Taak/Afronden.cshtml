@@ -4,10 +4,9 @@
     ViewData["Title"] = "Afronden";
     Layout = "~/Views/Shared/_Layout2.cshtml";
 }
-
-<h2>Edit</h2>
-
-<h4>Taak</h4>
+<h4>
+@Html.DisplayFor(model => model.Naam)
+</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -25,19 +24,16 @@
 
             <div class="form-group">
                 <label asp-for="GewerkteUren" class="control-label"></label>
-                <input  asp-for="GewerkteUren" class="form-control" />
+                <input asp-for="GewerkteUren" class="form-control" />
                 <span asp-validation-for="GewerkteUren" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <input type="submit" value="Afronden" class="btn btn-succes" />
+                <input type="submit" value="Afronden" class="btn btn-success toevoegen" />
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 

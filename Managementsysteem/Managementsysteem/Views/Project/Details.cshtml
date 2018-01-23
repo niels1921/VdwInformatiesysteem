@@ -8,7 +8,14 @@
 
 <h2>
     @Html.DisplayFor(model => model.Project.Naam)
+
+    <a style="margin-left: 5px;" class="btn btn-danger pull-right" asp-action="Delete" asp-route-id="@Model.Project.Id">Verwijder</a>
+
+    <a class="btn btn-warning pull-right" asp-action="Edit" asp-route-id="@Model.Project.Id">Bewerk</a>
+
 </h2>
+
+<hr />
 
 <div class="row">
     <div class="col-md-6">
@@ -36,56 +43,110 @@
         <dd>
             @Html.DisplayFor(model => model.Project.Deadline)
         </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Project.Klant)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Project.Klant.Naam)
-        </dd>
-
-
-        <div>
-            <a asp-action="Edit" asp-route-id="@Model.Project.Id">Edit</a> |
-            <a asp-action="Index">Back to List</a> |
-            <a asp-controller="Project" asp-action="Taak">Nieuwe Taak</a> |
-            <a asp-controller="Project" asp-action="Gebeurtenis">Nieuwe Gebeurtenis</a>
-
-        </div>
-
 
     </div>
 
     <div class="col-md-6">
-        <div class="col-md-12">
-            <h2>Taken</h2>
 
-            @foreach (Taak taak in Model.Taak)
-        {
-            <tr>
-                <td>@taak.Naam</td>
-                <td>@taak.Omschrijving</td>
 
-            </tr>
-    }
+            <h2>
+                Gebeurtenissen
 
-        </div>
-
-        <div class="col-md-12">
-            <h2>Gebeurtenissen</h2>
+                <a class="btn btn-primary pull-right" asp-controller="Project" asp-action="Gebeurtenis">Nieuwe Gebeurtenis</a>
+            </h2>
 
             @foreach (Gebeurtenis gebeurtenis in Model.Gebeurtenis)
-        {
-            <tr>
-                <td>@gebeurtenis.Beschrijving</td>
+            {
+                <tr>
+                    <td>@gebeurtenis.Beschrijving</td>
 
-            </tr>
-    }
+                </tr>
+            }
 
-        </div>
+ 
 
 
     </div>
+    <div class="col-md-12">
+        <h2>
+            Taken
 
+            <a class="btn btn-primary pull-right" asp-controller="Project" asp-action="Taak">Nieuwe Taak</a>
+        </h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Naam
+                    </th>
+
+                    <th>
+                        Datum
+                    </th>
+                    <th>
+                        Verwachte uren
+                    </th>
+                    <th>
+                        Project
+                    </th>
+                    <th>
+                        Werknemer
+                    </th>
+                    <th>
+                        Afgerond
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Taak taak in Model.Taak)
+                {
+                    <tr>
+                        <td>
+                            <a asp-action="Details" asp-controller="Taak" asp-route-id="@taak.Id"> @Html.DisplayFor(modelItem => taak.Naam)</a>
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => taak.Datum)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => taak.VerwachteUren)
+                        </td>
+
+
+                        <td>
+                            <a asp-controller="Project" asp-action="Details" asp-route-id="@taak.Project_Id">@Html.DisplayFor(modelItem => taak.Project.Naam)</a>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => taak.Werknemer.UserName)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => taak.Afgerond)
+                        </td>
+
+                        <td>
+                            @if (taak.Afgerond != true)
+                            {
+                                <a class="btn btn-success" asp-controller="Taak" asp-action="Afronden" asp-route-id="@taak.Id">Afronden</a>
+                            }
+                            else
+                            {
+
+                                <a class="btn btn-danger" asp-controller="Taak" asp-action="Delete" asp-route-id="@taak.Id">Verwijderen</a>
+
+                            }
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+
+
+
+    </div>
 
 </div>
 

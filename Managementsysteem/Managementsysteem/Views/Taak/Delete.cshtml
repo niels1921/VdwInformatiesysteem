@@ -5,66 +5,32 @@
     Layout = "~/Views/Shared/_Layout2.cshtml";
 }
 
-<h2>Delete</h2>
-
-<h3>Are you sure you want to delete this?</h3>
+<h3>Weet je zeker dat je @Html.DisplayFor(model => model.Naam) wilt verwijderen? </h3>
 <div>
-    <h4>Taak</h4>
+    <h4>Taak @Html.DisplayFor(model => model.Naam)</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Naam)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Naam)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Omschrijving)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Omschrijving)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Datum)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Datum)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.VerwachteUren)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.VerwachteUren)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.GewerkteUren)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.GewerkteUren)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Image)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Image)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Project)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Project.Naam)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Werknemer)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Werknemer.Id)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Delete" class="btn btn-default" /> |
-        <a asp-action="Index">Back to List</a>
-    </form>
-</div>
+
+
+    <div class="col-md-12">
+       <b>Taakomschrijving:</b> @Html.DisplayFor(model => model.Omschrijving)
+    </div>
+    <div class="col-md-12">
+        <b>Datum:</b> @Html.DisplayFor(model => model.Datum)
+    </div>
+    <div class="col-md-12">
+        <b>Verwachte uren:</b> @Html.DisplayFor(model => model.VerwachteUren)
+    </div>
+    <div class="col-md-12">
+        <b>Gewerkte uren:</b> @Html.DisplayFor(model => model.GewerkteUren)
+    </div>
+    <div class="col-md-12">
+        <b>Project:</b> @Html.DisplayFor(model => model.Project.Naam)
+    </div>
+    <div class="col-md-12">
+        <b>Werknemer:</b> @Html.DisplayFor(model => model.Werknemer.UserName)
+    </div>
+
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="Id" />
+            <input type="submit" value="Delete" class="btn btn-danger toevoegen margtop" />
+        </form>

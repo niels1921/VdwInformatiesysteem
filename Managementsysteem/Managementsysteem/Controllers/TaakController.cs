@@ -7,24 +7,43 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Managementsysteem.Data;
 using Managementsysteem.Models;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace Managementsysteem.Controllers
 {// werkt
     public class TaakController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private IHostingEnvironment _Environment;
 
-        public TaakController(ApplicationDbContext context)
+
+        public TaakController(ApplicationDbContext context, IHostingEnvironment environment)
         {
             _context = context;
+            _Environment = environment;
+
         }
-       
-        // GET: Taak
-        public async Task<IActionResult> Index()
+
+        public async Task<IActionResult> Index(string searchString)
         {
             var applicationDbContext = _context.Taak.Include(t => t.Project).Include(t => t.Werknemer);
-            return View(await applicationDbContext.ToListAsync());
+
+            var taken = from k in applicationDbContext
+                          select k;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                taken = taken.Where(s => s.Naam.Contains(searchString));
+            }
+
+            return View(await taken.ToListAsync());
         }
+
+
+
+
 
         // GET: Taak/Details/5
         //[Authorize(Roles = "Employee, Manager, Admin")]
@@ -61,7 +80,7 @@ namespace Managementsysteem.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Naam,Project_Id,Omschrijving,Datum,VerwachteUren,User_id,Image")] Taak taak)
+        public async Task<IActionResult> Create([Bind("Id,Naam,Project_Id,Omschrijving,Datum,VerwachteUren,User_id,Image")] Taak taak, IFormFile ProfilePictureFile)
         {
 
             int project_id = new int();
@@ -73,6 +92,27 @@ namespace Managementsysteem.Controllers
 
             if (ModelState.IsValid)
             {
+
+                if (ProfilePictureFile != null)
+                {
+
+                    string uploadPatch = Path.Combine(_Environment.WebRootPath, "uploads");
+                    Directory.CreateDirectory(Path.Combine(uploadPatch, taak.Naam));
+
+                    string FileName = ProfilePictureFile.FileName;
+                    if (FileName.Contains('\\'))
+                    {
+                        FileName = FileName.Split('\\').Last();
+                    }
+
+                    using (var stream = new FileStream(Path.Combine(uploadPatch, taak.Naam, FileName), FileMode.Create))
+                    {
+                        await ProfilePictureFile.CopyToAsync(stream);
+                    }
+                    taak.Image = FileName;
+                }
+
+
 
                 taak.Project_Id = project_id;
 

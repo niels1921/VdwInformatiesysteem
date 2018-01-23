@@ -5,87 +5,128 @@
     Layout = "~/Views/Shared/_Layout2.cshtml";
 }
 
-<h2>Details</h2>
+<h2>
+    @Html.DisplayFor(model => model.Klant.Naam)
 
-<div>
-    <h4>Klant</h4>
-    <hr />
+    <a class="btn btn-primary pull-right" asp-controller="Klant" asp-action="Project">Nieuw Project</a>
 
-            @Html.DisplayNameFor(model => model.Klant.Id)
- 
-            @Html.DisplayFor(model => model.Klant.Id)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Klant.Naam)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Klant.Naam)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Klant.Contactpersoon)
-        </dt>
-        <dd>
+</h2>
+
+
+<hr />
+<div class="col-md-12 details">
+    <div class="col-md-4 infoblock">
+        <h2>Contactinformatie</h2>
+
+        <div class="col-md-12">
             @Html.DisplayFor(model => model.Klant.Contactpersoon)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Klant.Email)
-        </dt>
-        <dd>
+        </div>
+
+        <div class="col-md-12">
+
             @Html.DisplayFor(model => model.Klant.Email)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Klant.Telefoon)
-        </dt>
-        <dd>
+        </div>
+        <div class="col-md-12">
+
             @Html.DisplayFor(model => model.Klant.Telefoon)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Klant.Straatnaam)
-        </dt>
-        <dd>
+
+        </div>
+        <div class="col-md-12">
             @Html.DisplayFor(model => model.Klant.Straatnaam)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Klant.Huisnummer)
-        </dt>
-        <dd>
+
+
             @Html.DisplayFor(model => model.Klant.Huisnummer)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Klant.Postcode)
-        </dt>
-        <dd>
+
+        </div>
+        <div class="col-md-12">
             @Html.DisplayFor(model => model.Klant.Postcode)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Klant.Woonplaats)
-        </dt>
-        <dd>
+
+
             @Html.DisplayFor(model => model.Klant.Woonplaats)
-        </dd>
+        </div>
 
-    </dl>
-    <img src="~/Uploads/@Model.Klant.Naam/@Model.Klant.Profiel_foto" class="profilePicture" />
-</div>
-<div>
-    <a class="btn btn-warning" asp-action="Edit" asp-route-id="@Model.Klant.Id">Edit</a> |
-    <a class="btn btn-secondary" asp-action="Index">Back to List</a>
-    <a class="btn btn-primary" asp-controller="Klant" asp-action="Project">Nieuw Project</a>
+        <div class="knoppen">
 
-</div>
 
-<div class="row">
-    <div class="col-md-12">
-        <h2>Projecten</h2>
 
-        @foreach (Project project in Model.Project)
-        {
-            <tr>
-                <td>@project.Naam</td>
-                <td>@project.Deadline</td>
+            <a class="btn btn-warning" asp-action="Edit" asp-route-id="@Model.Klant.Id">Bewerk</a>
+            <a class="btn btn-danger" asp-action="Delete" asp-route-id="@Model.Klant.Id">Verwijder</a>
 
-            </tr>
-        }
+
+        </div>
+
+
 
     </div>
+
+
+    <div class="col-md-6 infoblock">
+
+        <img src="~/Uploads/@Model.Klant.Naam/@Model.Klant.Profiel_foto" class="profilePicture" />
+
+
+    </div>
+
+
+</div>
+
+
+
+<h2 class="projecttitle">Projecten</h2>
+
+<div class="col-md-12">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                   Naam
+                </th>
+                <th>
+                    Status
+                </th>
+
+                <th>
+                    Startdatum
+                </th>
+                <th>
+                    Deadline
+                </th>
+
+                <th>
+                    Klant
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Project project in Model.Project)
+    {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => project.Naam)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => project.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => project.Startdatum)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => project.Deadline)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => project.Klant.Naam)
+                </td>
+                <td>
+                    <a class="btn btn-warning" asp-controller="Project" asp-action="Edit" asp-route-id="@project.Id">Bewerk</a>
+                    <a class="btn btn-info" asp-controller="Project" asp-action="Details" asp-route-id="@project.Id">Bekijk</a>
+                    <a class="btn btn-danger" asp-controller="Project" asp-action="Delete" asp-route-id="@project.Id">Verwijder</a>
+                </td>
+            </tr>
+}
+        </tbody>
+    </table>
+
+
 </div>

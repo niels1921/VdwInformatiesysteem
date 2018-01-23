@@ -66,11 +66,12 @@ namespace Managementsysteem.Controllers
             var klant = Klanten.First(i => i.Id == id);
 
             var Projecten = from Project in _context.Project
-                        where Project.Id == id
+                        where Project.Klant_Id == id
                         select Project;
 
             klantmodel.Klant = klant;
             klantmodel.Project = Projecten;
+
             return View(klantmodel);
         }
 

@@ -81,8 +81,32 @@ li.nav-item{
     min-height: 170px;
 }
 
+.infoblock {
+    float: left;
+}
 .toevoegen{
     width: 100%;
     margin-bottom: 20px;
     padding: 10px;
+}
+
+.details {
+    min-height: 240px;
+    padding: 10px;
+}
+.projecttitle{
+    margin-top: 20px;
+}
+
+.margtop{
+    margin-top:30px;
+}
+
+.logonaam {
+    margin: auto;       
+    text-align: center;
+}
+
+.card.card-login.mx-auto.mt-5, .card.card-register.mx-auto.mt-5 {
+    top: 15px;
 }
