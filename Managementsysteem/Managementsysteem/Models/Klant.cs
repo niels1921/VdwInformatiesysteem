@@ -14,10 +14,10 @@ namespace Managementsysteem.Models
         [DisplayName("ID")]
         public int Id { get; set; }
         [Required(ErrorMessage = "*voer een naam in")]
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Voer alleen letters in")]
+        [RegularExpression(@"^[a-zA-Z\s]+$", ErrorMessage = "Voer alleen letters in")]
         public string Naam { get; set; }
 
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Voer alleen letters in")]
+        [RegularExpression(@"^[a-zA-Z\s]+$", ErrorMessage = "Voer alleen letters in")]
         public string Contactpersoon { get; set; }
 
         [Required(ErrorMessage = "*voer een email in")]
@@ -31,7 +31,7 @@ namespace Managementsysteem.Models
         public string Telefoon { get; set; }
 
         [Required(ErrorMessage = "*voer een straatnaam in")]
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Voer alleen letters in")]
+        [RegularExpression(@"^[a-zA-Z\s]+$", ErrorMessage = "Voer alleen letters in")]
         public string Straatnaam { get; set; }
 
         [Required(ErrorMessage = "*voer een huisnummer in")]
@@ -44,7 +44,7 @@ namespace Managementsysteem.Models
         public string Postcode { get; set; }
 
         [Required(ErrorMessage = "*voer een woonplaats in")]
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Voer alleen letters in")]
+        [RegularExpression(@"^[a-zA-Z\s]+$", ErrorMessage = "Voer alleen letters in")]
         public string Woonplaats { get; set; }
 
         [Display(Name = "Profiel foto")]

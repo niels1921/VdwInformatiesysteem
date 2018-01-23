@@ -14,7 +14,7 @@ namespace Managementsysteem.Models
         public int Id { get; set; }
 
         [Required(ErrorMessage = "*voer een naam in")]
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Voer alleen letters in")]
+        [RegularExpression(@"^[a-zA-Z\s]+$", ErrorMessage = "Voer alleen letters in")]
         public string Naam { get; set; }
 
         public string Status { get; set; }

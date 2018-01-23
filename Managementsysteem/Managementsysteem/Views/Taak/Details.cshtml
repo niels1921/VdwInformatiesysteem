@@ -41,11 +41,17 @@
         <dd>
             @Html.DisplayFor(model => model.GewerkteUren)
         </dd>
+        @if (Model.Image != null)
+        {
         <dt>
             @Html.DisplayNameFor(model => model.Image)
-        </dt>
+        </dt>            
+        }
         <dd>
+            @if (Model.Image != null)
+        {
             @Html.DisplayFor(model => model.Image)
+        }
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Project)
