@@ -1,38 +1,33 @@
 ﻿@model IEnumerable<Managementsysteem.Models.Taak>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Taken";
     Layout = "~/Views/Shared/_Layout2.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Taken</h2>
 
 <table class="table">
     <thead>
         <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Naam)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Omschrijving)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Datum)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.VerwachteUren)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.GewerkteUren)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Image)
-                </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Naam)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Datum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VerwachteUren)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Project)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Werknemer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Afgerond)
             </th>
             <th></th>
         </tr>
@@ -41,33 +36,34 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Naam)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Omschrijving)
-            </td>
+                <a asp-action="Details" asp-route-id="@item.Id"> @Html.DisplayFor(modelItem => item.Naam)</a>
+        </td>
+
             <td>
                 @Html.DisplayFor(modelItem => item.Datum)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.VerwachteUren)
             </td>
+
+
             <td>
-                @Html.DisplayFor(modelItem => item.GewerkteUren)
+                <a asp-controller="Project" asp-action="Details" asp-route-id="@item.Project_Id">@Html.DisplayFor(modelItem => item.Project.Naam)</a>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Image)
+                @Html.DisplayFor(modelItem => item.Werknemer.UserName)
             </td>
+
             <td>
-                @Html.DisplayFor(modelItem => item.Project.Naam)
+                @Html.DisplayFor(modelItem => item.Afgerond)
             </td>
+
             <td>
-                @Html.DisplayFor(modelItem => item.Werknemer.Id)
-            </td>
-            <td>
-                <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id">Bewerk</a>
-                <a class="btn btn-info" asp-action="Details" asp-route-id="@item.Id">Bekijk</a>
-                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Verwijder</a>
+                @if (item.Afgerond != true)
+                 {
+                        <a class="btn btn-success" asp-action="Afronden" asp-route-id="@item.Id">Afronden</a>
+                  }
+
             </td>
         </tr>
 }

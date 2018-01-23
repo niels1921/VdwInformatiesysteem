@@ -9,7 +9,7 @@
 
 <div class="row">
     <div class="col-md-6">
-        <h2>Mijn taken</h2>
+        <h2>Mijn taken<a class="btn btn-default pull-right" asp-controller="Taak" asp-action="Index">Alle taken </a></h2>
 
         @foreach (Taak taak in Model.Taak)
         {
@@ -23,7 +23,7 @@
 
     </div>
     <div class="col-md-6">
-        <h2>Projecten</h2>
+        <h2>Projecten<a class="btn btn-default pull-right" asp-controller="Project" asp-action="Index">Alle Projecten </a></h2>
 
         @foreach (Project project in Model.Project)
     {
@@ -37,7 +37,7 @@
 
     </div>
     <div class="col-md-12">
-        <h2>Afspraken</h2>
+        <h2>Afspraken <a class="btn btn-default pull-right" asp-controller="Afspraak" asp-action="Index">Afspraken </a></h2>
 
         @foreach (Afspraak afspraak in Model.Afspraak)
     {

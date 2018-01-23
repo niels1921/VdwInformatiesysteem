@@ -39,5 +39,7 @@ namespace Managementsysteem.Models
         public ApplicationUser Werknemer { get; set; }
 
         public string Image { get; set; }
+
+        public bool Afgerond { get; set; }
     }
 }

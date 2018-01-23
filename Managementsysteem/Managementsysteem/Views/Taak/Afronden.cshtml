@@ -1,0 +1,43 @@
+﻿@model Managementsysteem.Models.Taak
+
+@{
+    ViewData["Title"] = "Afronden";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<h2>Edit</h2>
+
+<h4>Taak</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Afronden">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+
+            <input type="hidden" asp-for="User_id" class="form-control" />
+            <input type="hidden" asp-for="Afgerond" class="form-control" />
+            <input type="hidden" asp-for="Naam" class="form-control" />
+            <input type="hidden" asp-for="Project_Id" class="form-control" />
+            <input type="hidden" asp-for="Omschrijving" class="form-control" />
+            <input type="hidden" asp-for="Datum" class="form-control" />
+            <input type="hidden" asp-for="VerwachteUren" class="form-control" />
+
+            <div class="form-group">
+                <label asp-for="GewerkteUren" class="control-label"></label>
+                <input  asp-for="GewerkteUren" class="form-control" />
+                <span asp-validation-for="GewerkteUren" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Afronden" class="btn btn-succes" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+

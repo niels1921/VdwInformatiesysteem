@@ -35,6 +35,7 @@ namespace Managementsysteem.Controllers
 
             var Taken = from Taak in _context.Taak
                         where Taak.User_id == userId
+                        where Taak.Afgerond == false
                         select Taak;
 
             var Projecten = from Project in _context.Project

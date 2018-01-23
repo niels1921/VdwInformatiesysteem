@@ -35,17 +35,14 @@
 
 
             <div class="form-group">
-                <label asp-for="Profiel_foto" class="col-md-2 control-label"></label>
-                <div class="col-md-10">
+                <label asp-for="Profiel_foto" class="control-label"></label>
+                
                     @*<img src="~/Uploads/@Model.Naam/@Model.Profiel_foto" class="profilePicture" />*@
                     <input type="hidden" asp-for="Profiel_foto" />
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-10">
+
                     <input type="file" name="ProfilePictureFile" />
                     <span asp-validation-for="Profiel_foto" class="text-danger"></span>
-                </div>
+          
             </div>
 
         </div>
@@ -75,12 +72,10 @@
         </div>
 
 
-            <input type="submit" value="Create" class="btn btn-default" />
+            <input type="submit" value="Voeg toe" class="btn btn-success toevoegen" />
 
     </div>
 </form>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
 

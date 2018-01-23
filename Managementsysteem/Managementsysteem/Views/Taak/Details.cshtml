@@ -62,6 +62,10 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    @if (Model.Afgerond != true)
+    {
+        <a class="btn btn-success" asp-action="Afronden" asp-route-id="@Model.Id">Afronden</a>
+    }
+
+    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@Model.Id">Verwijder</a>
 </div>

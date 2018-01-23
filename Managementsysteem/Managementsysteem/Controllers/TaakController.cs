@@ -61,7 +61,7 @@ namespace Managementsysteem.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Naam,Project_Id,Omschrijving,Datum,VerwachteUren,GewerkteUren,User_id,Image")] Taak taak)
+        public async Task<IActionResult> Create([Bind("Id,Naam,Project_Id,Omschrijving,Datum,VerwachteUren,User_id,Image")] Taak taak)
         {
 
             int project_id = new int();
@@ -87,7 +87,7 @@ namespace Managementsysteem.Controllers
 
         // GET: Taak/Edit/5
         //[Authorize(Roles = "Employee, Manager, Admin")]
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Afronden(int? id)
         {
             if (id == null)
             {
@@ -99,8 +99,6 @@ namespace Managementsysteem.Controllers
             {
                 return NotFound();
             }
-            ViewData["Project_Id"] = new SelectList(_context.Project, "Id", "Naam", taak.Project_Id);
-            ViewData["User_id"] = new SelectList(_context.Users, "Id", "Id", taak.User_id);
             return View(taak);
         }
 
@@ -109,12 +107,14 @@ namespace Managementsysteem.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Naam,Project_Id,Omschrijving,Datum,VerwachteUren,GewerkteUren,User_id,Image")] Taak taak)
+        public async Task<IActionResult> Afronden(int id, [Bind("Id,Naam,Project_Id,Omschrijving,Datum,VerwachteUren,GewerkteUren,User_id,Image,Afgerond")] Taak taak)
         {
             if (id != taak.Id)
             {
                 return NotFound();
             }
+
+            taak.Afgerond = true;
 
             if (ModelState.IsValid)
             {
@@ -136,8 +136,6 @@ namespace Managementsysteem.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Project_Id"] = new SelectList(_context.Project, "Id", "Naam", taak.Project_Id);
-            ViewData["User_id"] = new SelectList(_context.Users, "Id", "Id", taak.User_id);
             return View(taak);
         }
 
@@ -177,5 +175,8 @@ namespace Managementsysteem.Controllers
         {
             return _context.Taak.Any(e => e.Id == id);
         }
+
+
+
     }
 }

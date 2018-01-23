@@ -39,7 +39,7 @@
     <div class="col-md-6 klant">
         <div class="row">
 
-            <div class="col-md-6">
+            <div class="col-md-6 img_button">
                 <img src="~/Uploads/@item.Naam/@item.Profiel_foto" class="profilePicture" />
                 <div class="knoppen">
                 <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id">Bewerk</a>
@@ -63,16 +63,14 @@
                 </div>
                 <div class="row">
                     @Html.DisplayFor(modelItem => item.Straatnaam)
-                </div>
-                <div class="row">
+             
 
                     @Html.DisplayFor(modelItem => item.Huisnummer)
                 </div>
                 <div class="row">
 
                     @Html.DisplayFor(modelItem => item.Postcode)
-                </div>
-                <div class="row">
+           
 
                     @Html.DisplayFor(modelItem => item.Woonplaats)
                 </div>

@@ -10,5 +10,6 @@ namespace Managementsysteem.Models
     public class ApplicationUser : IdentityUser
     {
         public string Image { get; set; }
+
     }
 }
