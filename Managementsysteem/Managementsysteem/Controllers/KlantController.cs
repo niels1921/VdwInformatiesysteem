@@ -120,7 +120,7 @@ namespace Managementsysteem.Controllers
         }
 
         // GET: Klant/Edit/5
-        //[Authorize(Roles = "Employee, Manager, Admin")]
+        [Authorize(Roles = "Employee, Manager, Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)

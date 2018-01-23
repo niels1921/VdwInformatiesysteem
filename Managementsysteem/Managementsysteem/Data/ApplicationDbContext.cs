@@ -32,5 +32,7 @@ namespace Managementsysteem.Data
         public DbSet<Managementsysteem.Models.Taak> Taak { get; set; }
 
         public DbSet<Managementsysteem.Models.Gebeurtenis> Gebeurtenis { get; set; }
+
+        public DbSet<Managementsysteem.Models.Rollen> Rollen { get; set; }
     }
 }
