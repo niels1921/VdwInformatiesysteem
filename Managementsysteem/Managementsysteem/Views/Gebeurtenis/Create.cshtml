@@ -3,41 +3,43 @@
 @{
     var project = ViewContext.RouteData.Values["project"];
     ViewData["Title"] = project;
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
 }
 
-<h2>@ViewData["Title"]</h2>
 
-<h4>Gebeurtenis</h4>
+
+<h4>Nieuwe gebeurtenis</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Beschrijving" class="control-label"></label>
-                <input asp-for="Beschrijving" class="form-control" />
-                <span asp-validation-for="Beschrijving" class="text-danger"></span>
-            </div>
+    <div class="col-md-12">
+        <div class="col-md-6 infoblock">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Beschrijving" class="control-label"></label>
+                    <textarea rows="5" asp-for="Beschrijving" class="form-control"></textarea>
+                    <span asp-validation-for="Beschrijving" class="text-danger"></span>
+                </div>
+        </div>
+        <div class="col-md-6 infoblock">
             <div class="form-group">
                 <label asp-for="Datum" class="control-label"></label>
                 <input asp-for="Datum" class="form-control" />
                 <span asp-validation-for="Datum" class="text-danger"></span>
+            </div>
             </div>
             @*<div class="form-group">
                 <label asp-for="Project_Id" class="control-label"></label>
                 <select asp-for="Project_Id" class ="form-control" asp-items="ViewBag.Project_Id"></select>
             </div>*@
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Toevoegen" class="btn btn-success toevoegen" />
             </div>
-        </form>
+            </form>
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

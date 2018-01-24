@@ -29,6 +29,10 @@
     background-color: #cc0000;
 }
 
+.btn-link {
+    color: #fff;
+}
+
 .profilePicture{
     width: 100%;
     height: auto;
