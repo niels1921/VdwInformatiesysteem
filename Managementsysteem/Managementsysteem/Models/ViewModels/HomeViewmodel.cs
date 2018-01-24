@@ -10,5 +10,7 @@ namespace Managementsysteem.Models.ViewModels
         public IEnumerable<Taak> Taak { get; set; }
         public IEnumerable<Project> Project { get; set; }
         public IEnumerable<Afspraak> Afspraak { get; set; }
+        public IEnumerable<Klant> Klant { get; set; }
+
     }
 }

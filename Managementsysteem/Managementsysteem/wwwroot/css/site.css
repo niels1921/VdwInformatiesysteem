@@ -47,8 +47,8 @@
 }
 .knop {
     color: #fff;
-    background-color: #007bff;
-    border-color: #007bff;
+    background-color: #0079c1;
+    border-color: #0079c1;
 }
 li.nav-item{
     font-size: 20px;
@@ -109,4 +109,25 @@ li.nav-item{
 
 .card.card-login.mx-auto.mt-5, .card.card-register.mx-auto.mt-5 {
     top: 15px;
+}
+
+.homeklant{
+    margin-top: 20px;
+    padding: 0 50px ;
+    float: left;
+}
+
+.bottom-align-text {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.col-lg-12.homeproject {
+    margin: 5px 0px;
+}
+
+
+.nopad {
+   padding-right: 0px !important;
 }

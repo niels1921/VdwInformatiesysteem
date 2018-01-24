@@ -44,6 +44,10 @@ namespace Managementsysteem.Controllers
             var Afspraken = from Afspraak in _context.Afspraak
                             select Afspraak;
 
+            var Klanten = from Klant in _context.Klant
+                            select Klant;
+
+            mymodel.Klant = Klanten;
             mymodel.Taak = Taken;
             mymodel.Afspraak = Afspraken;
             mymodel.Project = Projecten;
