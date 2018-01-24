@@ -15,6 +15,7 @@ namespace Managementsysteem.Controllers
     public class RollenController : Controller
     {
         private readonly ApplicationDbContext _context;
+        
 
         public RollenController(ApplicationDbContext context)
         {
@@ -61,6 +62,7 @@ namespace Managementsysteem.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        
         public async Task<IActionResult> Create([Bind("ID,User_id,Rol")] Rollen rollen, IServiceProvider serviceProvider)
         {
             if (ModelState.IsValid)
@@ -68,8 +70,8 @@ namespace Managementsysteem.Controllers
                 _context.Add(rollen);
                 
                 {
-                    var usermanager = .GetRequiredService<UserManager<ApplicationUser>>();
 
+                    var usermanager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
                     var Roleuser = new ApplicationUser
                     {
@@ -77,7 +79,7 @@ namespace Managementsysteem.Controllers
                         Email = "User_id",
                     };
 
-                    await usermanager.AddToRoleAsync(Roleuser, Role);
+                    await usermanager.AddToRoleAsync(Roleuser, "Rol");
                 }
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
