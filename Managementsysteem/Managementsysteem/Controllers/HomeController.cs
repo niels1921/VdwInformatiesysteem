@@ -13,7 +13,7 @@ using System.Security.Claims;
 
 namespace Managementsysteem.Controllers
 {
-
+    [Authorize]
     public class HomeController : Controller
     {
 

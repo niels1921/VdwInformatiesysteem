@@ -9,9 +9,11 @@ using Managementsysteem.Data;
 using Managementsysteem.Models;
 using Microsoft.ApplicationInsights.Extensibility.Implementation;
 using Managementsysteem.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Managementsysteem.Controllers
 {
+    [Authorize]
     public class ProjectController : Controller
     {
 

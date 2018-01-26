@@ -4,12 +4,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using Managementsysteem.Data;
 using Managementsysteem.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Managementsysteem.Controllers
 {
+    [Authorize]
+
     [Produces("application/json")]
     [Route("api/afspraken")]
     public class AfsprakenController : Controller

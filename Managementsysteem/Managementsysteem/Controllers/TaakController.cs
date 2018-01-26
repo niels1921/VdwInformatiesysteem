@@ -10,9 +10,12 @@ using Managementsysteem.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using System.IO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Managementsysteem.Controllers
 {// werkt
+
+    [Authorize]
     public class TaakController : Controller
     {
         private readonly ApplicationDbContext _context;

@@ -18,6 +18,8 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Managementsysteem.Controllers
 {
+   [Authorize]
+
     public class KlantController : Controller
     {
         private readonly ApplicationDbContext _context;

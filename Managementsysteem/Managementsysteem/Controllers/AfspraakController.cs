@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Managementsysteem.Data;
 using Managementsysteem.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Managementsysteem.Controllers
 {
+    [Authorize]
     public class AfspraakController : Controller
     {
         private readonly ApplicationDbContext _context;
